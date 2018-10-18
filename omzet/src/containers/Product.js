@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {  Image } from 'react-native'
+import { Image, TouchableOpacity } from 'react-native'
 import { Icon, Container, Content, List, ListItem, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 
@@ -46,7 +46,9 @@ class Product extends Component {
                   this.props.products.map(item => {
                     return (
                       <ListItem key={ item._id }>
-                        <Text>{ item.itemName }</Text>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('FormProduct', { navigate: this.props.navigation.navigate, product: item })}>
+                          <Text>{ item.itemName }</Text>
+                        </TouchableOpacity>
                       </ListItem>
                     )
                   })
