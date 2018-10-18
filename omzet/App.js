@@ -22,10 +22,14 @@ const AgentStack = createStackNavigator ({
   initialRouteName: 'HomeAgent'
 })
 
+const ProductStackNavigator = createStackNavigator({
+  Product
+})
+
 const BotttomNav = createBottomTabNavigator({
   Report: {screen : Report},
   Agent: {screen : AgentStack},
-  Product: {screen : Product}
+  Product: {screen : ProductStackNavigator}
 },
 {
   navigationOptions: ({ navigation }) => ({
@@ -37,7 +41,7 @@ const BotttomNav = createBottomTabNavigator({
       } else if (routeName === 'Agent') {
         icon = <Octicons name='organization' size={25} color={tintColor} />
       } else if (routeName === 'Product') {
-        icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        icon = <Ionicons name='ios-menu' size={25} color={tintColor} />
       }
       return icon
     }
