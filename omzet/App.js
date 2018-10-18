@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createSwitchNavigator, createBottomTabNavigator} from 'react-navigation'
+import {createSwitchNavigator, createStackNavigator, createBottomTabNavigator} from 'react-navigation'
 import { Provider } from 'react-redux'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Octicons from 'react-native-vector-icons/Octicons'
@@ -9,9 +9,17 @@ import Agent from './src/containers/Agent'
 import Product from './src/containers/Product'
 import store from './src/store/index'
 
+const AgentStack = createStackNavigator ({
+  HomeAgent : {screen : Agent},
+  // DetailAgent : {screen: DetailAgent},
+  // AddAgent : {screen: AddAgent}
+},{
+  initialRouteName: 'HomeAgent'
+})
+
 const BotttomNav = createBottomTabNavigator({
   Report: {screen : Report},
-  Agent: {screen : Agent},
+  Agent: {screen : AgentStack},
   Product: {screen : Product}
 },
 {

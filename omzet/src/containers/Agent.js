@@ -1,21 +1,48 @@
-import React, {Component} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react';
+import { Container, Icon } from 'native-base';
+import {Image, StyleSheet} from 'react-native'
+import AgentHeaderRight from '../components/AgentHeaderRight'
+
+
+const styles = StyleSheet.create({
+  image: {
+    width: 40,
+    height: 40,
+    marginLeft: 15,
+    resizeMode: 'contain'
+  }
+});
 
 class Agent extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Agent',
+    headerStyle: {
+      backgroundColor: '#5C6C9C',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      width: '90%',
+    },
+    headerLeft: (
+      <Image
+        source={require('../assets/omzet-logo.png')}
+        style={styles.image}
+      />
+    ),
+    headerRight: (
+      <AgentHeaderRight navigation={navigation}/>
+    )
+  });
 
   render() {
     return (
-      <View>
-        <Text>Product</Text>
-      </View>
-    )
+      <Container>
+        
+      </Container>
+    );
   }
 }
 
 
-export default (Agent)
+
+export default Agent
