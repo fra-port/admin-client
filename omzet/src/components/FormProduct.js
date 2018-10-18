@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native'
-import { Icon, Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base'
+import { Icon, Container, Content, Form, Item, Input, Label, Button, Text, View } from 'native-base'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
