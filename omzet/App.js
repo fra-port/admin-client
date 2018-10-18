@@ -14,6 +14,8 @@ import Product from './src/containers/Product'
 import store from './src/store/index'
 import FormProduct from './src/components/FormProduct'
 import AddProduct from './src/components/AddProduct'
+import DailyReportScreen from './src/containers/dailyReport'
+import DetailReportScreen from './src/containers/detailReport'
 
 const ProductStackNavigator = createStackNavigator({
   Product,
@@ -30,44 +32,65 @@ const AgentStack = createStackNavigator ({
   initialRouteName: 'HomeAgent'
 })
 
+
+const StackNavReport = createStackNavigator({
+  ReportHome: {
+    screen: Report
+  },
+  DailyReport: {
+    screen: DailyReportScreen
+  },
+  DetailReport: {
+    screen: DetailReportScreen
+  }
+},{
+  initialRouteName:'ReportHome'
+})
+
 const BotttomNav = createBottomTabNavigator({
-  Report: {screen : Report},
+  Report: {
+    screen: StackNavReport,
+    navigationOptions: {
+      title: 'Report',
+      tabBarLabel: 'Report'
+    }
+  },
   Agent: {screen : AgentStack},
   Product: {screen : ProductStackNavigator}
 },
-{
-  navigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, tintColor }) => {
-      const { routeName } = navigation.state
-      let icon
-      if (routeName === 'Report') {
-        icon = <Octicons name='checklist' size={25} color={tintColor} />
-      } else if (routeName === 'Agent') {
-        icon = <Octicons name='organization' size={25} color={tintColor} />
-      } else if (routeName === 'Product') {
-        icon = <Ionicons name='ios-menu' size={25} color={tintColor} />
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state
+        let icon
+        if (routeName === 'Report') {
+          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        } else if (routeName === 'Agent') {
+          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        } else if (routeName === 'Product') {
+          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        }
+        return icon
       }
-      return icon
-    }
-  }),
-  tabBarOptions: {
-    activeTintColor: '#58B9FE',
-    inactiveTintColor: 'gray',
-  },
-  backBehavior: 'none',
-})
+    }),
+    tabBarOptions: {
+      activeTintColor: '#DB0047',
+      inactiveTintColor: 'gray',
+    },
+    backBehavior: 'none',
+  })
 
-const SwitchNav = createSwitchNavigator (
-  { 
-    Login : {screen : Login},
-    Home : {screen : BotttomNav}
+const SwitchNav = createSwitchNavigator(
+  {
+    Login: { screen: Login },
+    Home: { screen: BotttomNav }
   },
   {
     initialRouteName: 'Login'
   }
-) 
+)
 
-export default class App extends Component{
+export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
