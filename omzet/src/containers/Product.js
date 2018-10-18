@@ -30,7 +30,7 @@ class Product extends Component {
       headerRight: (
         <Fragment>
           <TouchableOpacity onPress={() => navigation.navigate('AddProduct', { navigate: navigation.navigate })}>
-            <Icon style={{ color: 'white', marginRight: 20 }} name='add'/>
+            <Icon style={{ color: 'white', marginRight: 30 }} name='add'/>
           </TouchableOpacity>
   
           <Icon style={{color: "white", marginRight: 20}} name='more' />
