@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
-import { Container, Header, Content } from 'native-base'
-import HeaderReport from '../components/reportHeader'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native'
+import { Container, Header, Content, Icon } from 'native-base'
 import CardReport from '../components/reportCard'
+
+const styles = StyleSheet.create({
+  image: {
+    width: 40,
+    height: 40,
+    marginLeft: 15,
+    resizeMode: 'contain'
+  }
+});
 
 class Report extends Component {
   constructor(props) {
@@ -12,16 +20,36 @@ class Report extends Component {
     }
   }
 
-  static navigationOptions = {
-    title: 'List Report',
+  // static navigationOptions = {
+  //   title: 'List Report',
+  //   headerStyle: {
+  //     backgroundColor: '#87cefa'
+  //   },
+  //   headerTitleStyle: {
+  //     width: '100%',
+  //   },
+  //   headerTintColor: '#000000'
+  // }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Report',
     headerStyle: {
-      backgroundColor: '#87cefa'
+      backgroundColor: '#5C6C9C',
     },
+    headerTintColor: '#fff',
     headerTitleStyle: {
-      width: '100%',
+      width: '90%',
     },
-    headerTintColor: '#000000'
-  }
+    headerLeft: (
+      <Image
+        source={require('../assets/omzet-logo.png')}
+        style={styles.image}
+      />
+    ),
+    headerRight: (
+      <Icon style={{ color: "white", marginRight: 20 }} name='more' />
+    )
+  });
 
   render() {
     return (

@@ -40,7 +40,7 @@ export default class ReportThumbnail extends Component {
 
                 <Accordion
                     dataArray={dataArray}
-                    headerStyle={{ backgroundColor: "#b7daf8" }}
+                    headerStyle={{ backgroundColor: "#5C6C9C" }}
                     contentStyle={{ backgroundColor: "#ddecf8" }}
                 >
                 </Accordion>
