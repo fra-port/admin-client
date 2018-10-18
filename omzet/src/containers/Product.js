@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {  Image } from 'react-native'
-import { Icon, Container, Header, Content, List, ListItem, Text } from 'native-base'
+import { Icon, Container, Content, List, ListItem, Text, Spinner } from 'native-base'
+import { connect } from 'react-redux'
+
+import getProduct from '../store/product/actions'
 
 class Product extends Component {
   static navigationOptions = {
@@ -28,33 +31,46 @@ class Product extends Component {
     )
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
+  componentDidMount() {
+    this.props.getProducts()
   }
 
   render() {
-    const items = [
-      'Sayap',
-      'Paha Bawah',
-      'Paha Atas',
-      'Dada'
-    ]
     return (
       <Container>
         <Content>
-          <List dataArray={items}
-            renderRow={(item) =>
-              <ListItem>
-                <Text>{item}</Text>
-              </ListItem>
-            }>
-          </List>
+          {
+            this.props.isLoaded ? (
+              <List>
+                {
+                  this.props.products.map(item => {
+                    return (
+                      <ListItem key={ item._id }>
+                        <Text>{ item.itemName }</Text>
+                      </ListItem>
+                    )
+                  })
+                }
+              </List>
+            ) : <Spinner color='blue' />
+          }
         </Content>
       </Container>
     )
   }
 }
 
-export default (Product)
+const mapStateToProps = (state) => {
+  return {
+    products: state.product.products,
+    isLoaded: state.product.isLoaded
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(getProduct())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product)
