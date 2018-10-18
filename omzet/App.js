@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createSwitchNavigator, createBottomTabNavigator} from 'react-navigation'
+import {createSwitchNavigator, createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import { Provider } from 'react-redux'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Octicons from 'react-native-vector-icons/Octicons'
@@ -9,10 +9,14 @@ import Agent from './src/containers/Agent'
 import Product from './src/containers/Product'
 import store from './src/store/index'
 
+const ProductStackNavigator = createStackNavigator({
+  Product
+})
+
 const BotttomNav = createBottomTabNavigator({
   Report: {screen : Report},
   Agent: {screen : Agent},
-  Product: {screen : Product}
+  Product: ProductStackNavigator
 },
 {
   navigationOptions: ({ navigation }) => ({
@@ -24,7 +28,7 @@ const BotttomNav = createBottomTabNavigator({
       } else if (routeName === 'Agent') {
         icon = <Ionicons name='ios-home' size={25} color={tintColor} />
       } else if (routeName === 'Product') {
-        icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        icon = <Ionicons name='ios-menu' size={25} color={tintColor} />
       }
       return icon
     }
