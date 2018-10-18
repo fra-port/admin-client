@@ -12,6 +12,7 @@ import AgentAdd from './src/containers/AgentAdd'
 import AgentEdit from './src/containers/AgentEdit'
 import Product from './src/containers/Product'
 import store from './src/store/index'
+import FormProduct from './src/components/FormProduct'
 
 const AgentStack = createStackNavigator ({
   HomeAgent : {screen : Agent},
@@ -23,7 +24,8 @@ const AgentStack = createStackNavigator ({
 })
 
 const ProductStackNavigator = createStackNavigator({
-  Product
+  Product,
+  FormProduct
 })
 
 const BotttomNav = createBottomTabNavigator({
