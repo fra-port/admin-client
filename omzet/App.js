@@ -9,10 +9,12 @@ import Agent from './src/containers/Agent'
 import Product from './src/containers/Product'
 import store from './src/store/index'
 import FormProduct from './src/components/FormProduct'
+import AddProduct from './src/components/AddProduct'
 
 const ProductStackNavigator = createStackNavigator({
   Product,
-  FormProduct
+  FormProduct,
+  AddProduct
 })
 
 const BotttomNav = createBottomTabNavigator({

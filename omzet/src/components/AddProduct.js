@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native'
 import { Icon, Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base'
+import axios from 'axios'
+import { connect } from 'react-redux'
 
-export default class FormProduct extends Component {
+import getProduct from '../store/product/actions'
+
+class AddProduct extends Component {
   static navigationOptions = {
-    title: 'Product Detail',
+    title: 'Add Product',
     headerStyle: {
       backgroundColor: '#5C6C9C',
     },
@@ -30,18 +34,18 @@ export default class FormProduct extends Component {
 
   state = {
     itemName: '',
-    price: '',
-    id: ''
+    price: ''
   }
 
-  componentDidMount() {
-    const props = this.props.navigation.state.params
-
-    this.setState({
-      itemName: props.product.itemName,
-      price: props.product.price.toString(),
-      id: props.product._id
-    })
+  addProduct = () => () => {
+    axios.post('http://35.240.197.42/items', { itemName: this.state.itemName, price: Number(this.state.price) })
+      .then(() => {
+        this.props.getProducts()
+        this.props.navigation.state.params.navigate('Product')
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
@@ -51,20 +55,27 @@ export default class FormProduct extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Item Name</Label>
-              <Input onChangeText={(itemName) => this.setState({ itemName })} value={ this.state.itemName }/>
+              <Input onChangeText={(itemName) => this.setState({ itemName })}/>
             </Item>
             <Item floatingLabel last>
               <Label>Price</Label>
-              <Input onChangeText={(price) => this.setState({ price })} value={ this.state.price }/>
+              <Input onChangeText={(price) => this.setState({ price })}/>
             </Item>
           </Form>
 
           <Container style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-            <Button primary style={{ marginRight: 20 }}><Text> Update </Text></Button>
-            <Button danger><Text> Delete </Text></Button>
+            <Button primary style={{ marginRight: 20 }} onPress={ this.addProduct() }><Text> Add </Text></Button>
           </Container>
         </Content>
       </Container>
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(getProduct())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(AddProduct)
