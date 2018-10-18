@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native'
 import { Icon, Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base'
+import { connect } from 'react-redux'
+import axios from 'axios'
 
-export default class FormProduct extends Component {
+import getProduct from '../store/product/actions'
+
+class FormProduct extends Component {
   static navigationOptions = {
     title: 'Product Detail',
     headerStyle: {
@@ -44,6 +48,28 @@ export default class FormProduct extends Component {
     })
   }
 
+  updateProduct = () => {
+    axios.put(`http://35.240.197.42/items/${this.state.id}`, { itemName: this.state.itemName, price: Number(this.state.price) })
+      .then(() => {
+        this.props.getProducts()
+        this.props.navigation.state.params.navigate('Product')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  deleteProduct = () => {
+    axios.delete(`http://35.240.197.42/items/${this.state.id}`)
+      .then(() => {
+        this.props.getProducts()
+        this.props.navigation.state.params.navigate('Product')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   render() {
     return (
       <Container>
@@ -60,11 +86,19 @@ export default class FormProduct extends Component {
           </Form>
 
           <Container style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-            <Button primary style={{ marginRight: 20 }}><Text> Update </Text></Button>
-            <Button danger><Text> Delete </Text></Button>
+            <Button primary style={{ marginRight: 20 }} onPress={ () => this.updateProduct() }><Text> Update </Text></Button>
+            <Button danger onPress={ () => this.deleteProduct() }><Text> Delete </Text></Button>
           </Container>
         </Content>
       </Container>
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(getProduct())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(FormProduct)
