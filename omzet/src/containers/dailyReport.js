@@ -14,17 +14,6 @@ const styles = StyleSheet.create({
 
 export class dailyReport extends Component {
 
-    // static navigationOptions = {
-    //     title: 'Detail Report',
-    //     headerStyle: {
-    //         backgroundColor: '#87cefa'
-    //     },
-    //     headerTitleStyle: {
-    //         width: '100%',
-    //     },
-    //     headerTintColor: '#000000'
-    // }
-
     static navigationOptions = ({ navigation }) => ({
         title: 'Detail Report',
         headerStyle: {
@@ -41,8 +30,6 @@ export class dailyReport extends Component {
 
     render() {
         const propsDetail = this.props.navigation.state.params.detail
-        // const propsItem = this.props.navigation.state.params.item
-        // const propsIncome = this.props.navigation.state.params.income
 
         return (
             <Container>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image } from 'react-native'
-import { Container, Header, Content, Icon } from 'native-base'
+import { StyleSheet, View, TouchableOpacity, FlatList, Image } from 'react-native'
+import { Container, Header, Content, Icon, DatePicker, Text } from 'native-base'
 import CardReport from '../components/reportCard'
+import { connect } from 'react-redux'
+import { getAllReports } from '../store/reports/reports.action'
 
 const styles = StyleSheet.create({
   image: {
@@ -12,24 +14,22 @@ const styles = StyleSheet.create({
   }
 });
 
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+    
+//   }
+// }
+
 class Report extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-
-    }
+    this.state = { chosenDate: new Date() }
+    this.setDate = this.setDate.bind(this)
   }
 
-  // static navigationOptions = {
-  //   title: 'List Report',
-  //   headerStyle: {
-  //     backgroundColor: '#87cefa'
-  //   },
-  //   headerTitleStyle: {
-  //     width: '100%',
-  //   },
-  //   headerTintColor: '#000000'
-  // }
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate })
+  }
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Report',
@@ -55,7 +55,26 @@ class Report extends Component {
     return (
       <Container>
         <Content padder>
-          <CardReport navigation={this.props.navigation}></CardReport>
+
+          <DatePicker
+            defaultDate={new Date()}
+            minimumDate={new Date(2018, 1, 1)}
+            maximumDate={new Date(2018, 12, 31)}
+            locale={"en"}
+            timeZoneOffsetInMinutes={undefined}
+            modalTransparent={false}
+            animationType={"fade"}
+            androidMode={"default"}
+            placeHolderText="Select date"
+            textStyle={{ color: "green" }}
+            placeHolderTextStyle={{ color: "#d3d3d3" }}
+            onDateChange={this.setDate}
+          />
+          <Text>
+            Date: {this.state.chosenDate.toString().substr(4, 12)}
+          </Text>
+
+          <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()}></CardReport>
         </Content>
       </Container>
     )

@@ -12,15 +12,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAll: () => dispatch(getAllReports())
+        getAll: (date) => dispatch(getAllReports(date))
     }
 }
 
 export class CardReport extends Component {
     componentDidMount = () => {
-
-        this.props.getAll()
+        this.props.getAll(this.props.date)
     }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        this.props.getAll(this.props.date)
+    }
+
 
     render() {
         const report = this.props.reports
@@ -28,18 +32,17 @@ export class CardReport extends Component {
 
             <Card>
                 <CardItem header bordered>
-                    <Text>{report.totalIncome}</Text>
+                    <Text>Today Report {this.props.date}</Text>
                 </CardItem>
                 <CardItem bordered>
                     <Body style={{ flexDirection: 'row' }}>
                         <Text style={{ paddingRight: 10 }}>
-                            Total income : 50.000 {'\n'}
-                            Total agen : 4 {'\n'}
-                            Total Item Sold: 17 {'\n'}
+                            Total income : {report.totalIncome} {'\n'}
+                            Total agen : {report.totalReport} {'\n'}
                         </Text>
-                        <Text style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        {/* <Text style={{ justifyContent: 'center', alignItems: 'center' }}>
                             Total income : 50.0000
-                                         </Text>
+                                         </Text> */}
                     </Body>
                 </CardItem>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('DailyReport', { detail: report })}>
