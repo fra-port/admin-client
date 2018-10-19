@@ -16,17 +16,6 @@ class FormProduct extends Component {
     headerTitleStyle: {
       width: '90%',
     },
-    headerLeft: (
-      <Image
-        source={require('../assets/omzet-logo.png')}
-        style={{
-          width: 40,
-          height: 40,
-          marginLeft: 15,
-          resizeMode: 'contain'
-        }}
-      />
-    ),
     headerRight: (
       <Icon style={{color: "white", marginRight: 20}} name='more' />
     )
