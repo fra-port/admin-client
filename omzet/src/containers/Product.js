@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react'
+import React, { Component, Fragment } from 'react'
 import { Image, TouchableOpacity } from 'react-native'
 import { Icon, Container, Content, List, ListItem, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
+import Octicons from 'react-native-vector-icons/Octicons'
 
 import getProduct from '../store/product/actions'
 
@@ -30,10 +31,14 @@ class Product extends Component {
       headerRight: (
         <Fragment>
           <TouchableOpacity onPress={() => navigation.navigate('AddProduct', { navigate: navigation.navigate })}>
-            <Icon style={{ color: 'white', marginRight: 30 }} name='add'/>
+            <Icon style={{ color: 'white', marginRight: 30 }} name='add' />
           </TouchableOpacity>
-  
-          <Icon style={{color: "white", marginRight: 20}} name='more' />
+
+          <TouchableOpacity onPress={() => {
+            navigation.navigate('Login')
+          }}>
+            <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
+          </TouchableOpacity>
         </Fragment>
       )
     }
@@ -53,9 +58,9 @@ class Product extends Component {
                 {
                   this.props.products.map(item => {
                     return (
-                      <ListItem key={ item._id }>
+                      <ListItem key={item._id}>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('FormProduct', { navigate: this.props.navigation.navigate, product: item })}>
-                          <Text>{ item.itemName }</Text>
+                          <Text>{item.itemName}</Text>
                         </TouchableOpacity>
                       </ListItem>
                     )
