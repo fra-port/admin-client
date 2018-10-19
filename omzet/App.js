@@ -30,12 +30,6 @@ const AgentStack = createStackNavigator ({
   initialRouteName: 'HomeAgent'
 })
 
-const ProductStackNavigator = createStackNavigator({
-  Product,
-  FormProduct,
-  AddProduct
-})
-
 const BotttomNav = createBottomTabNavigator({
   Report: {screen : Report},
   Agent: {screen : AgentStack},
