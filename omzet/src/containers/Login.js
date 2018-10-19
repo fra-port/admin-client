@@ -1,16 +1,42 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Form, Item, Input, Label } from 'native-base';
+import firebase from 'react-native-firebase'
+
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      email: '',
+      password: ''
+    }
+  }
+
+  componentDidMount() {
+    if (AsyncStorage.getItem('user')) {
+      this.props.navigation.navigate('Home')
     }
   }
 
   handleLogin = () => {
-    this.props.navigation.navigate('Home')
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(data => {
+        AsyncStorage.setItem('user', JSON.stringify(data.user))
+        this.props.navigation.navigate('Home')
+      })
+      .catch(err => {
+        let errCode = err.code
+        let errMessage = err.message
+
+        if (errCode === 'auth/invalid-email'){
+          alert('Wrong email format!')
+        } else if (errCode === 'auth/user-not-found') {
+          alert('User not found! Wrong email address or password!')
+        } else {
+          alert(errMessage)
+        }
+      })
   }
 
   render() {
@@ -34,11 +60,11 @@ class Login extends Component {
             <Form>
               <Item floatingLabel>
                 <Label style={{ color: 'white' }}>Email</Label>
-                <Input style={{ color: 'white' }} />
+                <Input onChangeText={(email) => this.setState({ email })} style={{ color: 'white' }} />
               </Item>
               <Item floatingLabel>
                 <Label style={{ color: 'white' }}>Password</Label>
-                <Input style={{ color: 'white' }} />
+                <Input secureTextEntry={true} onChangeText={(password) => this.setState({ password })} style={{ color: 'white' }} />
               </Item>
             </Form>
           </View>
