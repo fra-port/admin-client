@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {createSwitchNavigator, createBottomTabNavigator, createStackNavigator} from 'react-navigation'
+import React, { Component } from 'react';
+import { createSwitchNavigator, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { Icon } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -23,14 +23,14 @@ const ProductStackNavigator = createStackNavigator({
   AddProduct
 })
 
-const AgentStack = createStackNavigator ({
-  HomeAgent : {screen : Agent},
-  AgentDetail : {screen: AgentDetail},
-  AgentAdd : {screen: AgentAdd},
-  AgentEdit : {screen: AgentEdit}
-},{
-  initialRouteName: 'HomeAgent'
-})
+const AgentStack = createStackNavigator({
+  HomeAgent: { screen: Agent },
+  AgentDetail: { screen: AgentDetail },
+  AgentAdd: { screen: AgentAdd },
+  AgentEdit: { screen: AgentEdit }
+}, {
+    initialRouteName: 'HomeAgent'
+  })
 
 
 const StackNavReport = createStackNavigator({
@@ -43,9 +43,9 @@ const StackNavReport = createStackNavigator({
   DetailReport: {
     screen: DetailReportScreen
   }
-},{
-  initialRouteName:'ReportHome'
-})
+}, {
+    initialRouteName: 'ReportHome'
+  })
 
 const BotttomNav = createBottomTabNavigator({
   Report: {
@@ -55,8 +55,8 @@ const BotttomNav = createBottomTabNavigator({
       tabBarLabel: 'Report'
     }
   },
-  Agent: {screen : AgentStack},
-  Product: {screen : ProductStackNavigator}
+  Agent: { screen: AgentStack },
+  Product: { screen: ProductStackNavigator }
 },
   {
     navigationOptions: ({ navigation }) => ({
@@ -64,17 +64,17 @@ const BotttomNav = createBottomTabNavigator({
         const { routeName } = navigation.state
         let icon
         if (routeName === 'Report') {
-          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+          icon = <Octicons name='checklist' size={25} color={tintColor} />
         } else if (routeName === 'Agent') {
-          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+          icon = <Octicons name='organization' size={25} color={tintColor} />
         } else if (routeName === 'Product') {
-          icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+          icon = <Ionicons name='ios-menu' size={25} color={tintColor} />
         }
         return icon
       }
     }),
     tabBarOptions: {
-      activeTintColor: '#DB0047',
+      activeTintColor: '#58B9FE',
       inactiveTintColor: 'gray',
     },
     backBehavior: 'none',
@@ -94,7 +94,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <SwitchNav/>
+        <SwitchNav />
       </Provider>
     );
   }
