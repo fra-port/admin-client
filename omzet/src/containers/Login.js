@@ -14,9 +14,15 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    if (AsyncStorage.getItem('user')) {
-      this.props.navigation.navigate('Home')
-    }
+    AsyncStorage.getItem('user')
+      .then(data => {
+        if (data) {
+          this.props.navigation.navigate('Home')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleLogin = () => {

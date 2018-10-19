@@ -1,10 +1,27 @@
 import React, { Component, Fragment } from 'react'
-import { Image, TouchableOpacity } from 'react-native'
+import { Image, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Icon, Container, Content, List, ListItem, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 import Octicons from 'react-native-vector-icons/Octicons'
+import firebase from 'react-native-firebase'
 
 import getProduct from '../store/product/actions'
+
+const logout = async (navigation) => {
+  let a = await firebase.auth().signOut()
+                  .then(() => {
+                      AsyncStorage.removeItem('user')
+                        .then(() => {
+                          navigation.navigate('Login')
+                        })
+                        .catch(err => {
+                          console.log(err)
+                        })
+                    })
+                  .catch(err => {
+                    console.log(err)
+                  })
+}
 
 class Product extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -35,7 +52,7 @@ class Product extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => {
-            navigation.navigate('Login')
+            logout(navigation)
           }}>
             <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
           </TouchableOpacity>
