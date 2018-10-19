@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
-import { Container, Icon } from 'native-base';
-import {Image, StyleSheet} from 'react-native'
+import { Container } from 'native-base';
+import {Image, StyleSheet, View, ProgressBarAndroid, Text, FlatList} from 'react-native'
 import AgentHeaderRight from '../components/AgentHeaderRight'
+import AgentThumbnail from '../components/AgentThumbnail'
+import {getAllAgent} from '../store/fetchAgent/action'
+import { connect } from 'react-redux'
 
+const mapStateToProps = state => {
+  return{
+    agent: state.agentReducer
+  }
+}
+
+const mapDistpatchToProps = dispatch => {
+  return {
+    getAllAgent: () => {
+      dispatch(getAllAgent())
+    }
+  }
+}
 
 const styles = StyleSheet.create({
   image: {
@@ -17,7 +33,7 @@ class Agent extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Agent',
     headerStyle: {
-      backgroundColor: '#5C6C9C',
+      backgroundColor: '#58B9FE',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -34,10 +50,23 @@ class Agent extends Component {
     )
   });
 
+  componentDidMount = () => {
+    this.props.getAllAgent()
+  }
+
   render() {
     return (
       <Container>
-        
+        {this.props.agent.isLoading && <ProgressBarAndroid color="#58B9FE" />}
+        <View style={{padding: 3}}>
+          {this.props.agent.allAgent.length > 0 && 
+            <FlatList
+              data={this.props.agent.allAgent}
+              renderItem= {({item, index}) => <AgentThumbnail agent={item} navigation={this.props.navigation}/>}
+              keyExtractor= {(item) => item._id}
+            />
+          }
+        </View>
       </Container>
     );
   }
@@ -45,4 +74,4 @@ class Agent extends Component {
 
 
 
-export default Agent
+export default connect(mapStateToProps, mapDistpatchToProps) (Agent)

@@ -4,16 +4,12 @@ import { Icon } from 'native-base';
 
 class AgentHeaderRight extends Component {
 
-  addAgent(){
-    this.props.navigation.navigate('AddAgent')
-  }
-
   render() {
     return (
       <Fragment>
         <TouchableOpacity
           onPress={() => {
-            this.addAgent()
+            this.props.navigation.navigate('AgentAdd')
           }}>
           <Icon style={{color: "white", marginRight: 20}} name='md-person-add' />
         </TouchableOpacity>
