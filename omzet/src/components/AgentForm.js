@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Thumbnail, Button, Form, Item, Input  } from 'native-base';
-import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 import axios from 'axios'
 const serverURL = "http://35.240.197.42"
@@ -21,6 +21,7 @@ class AgentForm extends Component {
       fileName: '',
       type: '',
       uri: '',
+      fetchImg: false,
       loading: false,
     }
   }
@@ -53,10 +54,10 @@ class AgentForm extends Component {
         console.log('Image picker error: ', response.error)
       } else {
         let source = { uri: response.uri }
-        console.log(response.fileName)
         this.setState({
           srcImg: source,
-          // propicURL: source,
+          fetchImg: true,
+          propicURL: response.uri,
           filename: response.fileName,
           type: response.type,
           uri: response.uri
@@ -65,32 +66,36 @@ class AgentForm extends Component {
     })
   }
 
-  uploadImage = async () => {
-    try {
-      let formData = new FormData()
-      let type = this.state.type
-      formData.append('image', { uri: this.state.uri, name: this.state.filename, type })
-      axios.post(`${serverURL}/image`, formData , {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-          }
-      })
-      .then (({data})=> {
-        this.setState({
-          propicURL: data.imageURL
-        })
-      })
-      .catch (err => {
-        Alert.alert(
-          'Alert',
-          `${err.message}`,
-          [
-            {text: 'OK'},
-          ],
-          { cancelable: false }
-        )
-      }) 
-    } catch(err) {
+  uploadImage =  () => {
+    let formData = new FormData()
+    let type = this.state.type
+    formData.append('image', { uri: this.state.uri, name: this.state.filename, type })
+    // axios.post(`${serverURL}/image`, formData , {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data'
+    //     }
+    // })
+    axios.post('https://blogserver.sumarsanaadi.com/articles/img/uploadimg', formData , {
+      headers: { 
+        'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViYzliYTJmMzM1YTI0M2NhY2UyYzY2ZCIsInVzZXJOYW1lIjoibWFkZWJpZW4iLCJuYW1lIjoiTWFkZSBCaWVuIiwiZW1haWwiOiJpZV9kYWxsb2Vua0B5YWhvby5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1Mzk5NDcwNTZ9.MhkISSnQie9MQ99noTZ9WaUK7yMrbGIjek7XBWkMgWk',
+        'Content-Type': 'multipart/form-data'
+        }
+    })
+    .then (({data})=> {
+      console.log(data.imageURL)
+      this.setState({
+        propicURL: data.imageURL
+      }, () => this.props.formMethod({
+        firstName : this.state.firstName,
+        lastName : this.state.lastName,
+        idTelegram : this.state.idTelegram,
+        email : this.state.email,
+        address : this.state.address,
+        phoneNumber : this.state.phoneNumber,
+        propicURL : this.state.propicURL
+      }))
+    })
+    .catch (err => {
       Alert.alert(
         'Alert',
         `${err.message}`,
@@ -99,20 +104,24 @@ class AgentForm extends Component {
         ],
         { cancelable: false }
       )
-    }
+    }) 
+    
   }
 
-  handleClick = async () => {
-    await this.uploadImage()
-    this.props.formMethod({
-      firstName : this.state.firstName,
-      lastName : this.state.lastName,
-      idTelegram : this.state.idTelegram,
-      email : this.state.email,
-      address : this.state.address,
-      phoneNumber : this.state.phoneNumber,
-      propicURL : this.state.propicURL
-    })
+  handleClick = () => {
+    if (this.state.fetchImg) {
+      this.uploadImage()
+    } else {
+      this.props.formMethod({
+        firstName : this.state.firstName,
+        lastName : this.state.lastName,
+        idTelegram : this.state.idTelegram,
+        email : this.state.email,
+        address : this.state.address,
+        phoneNumber : this.state.phoneNumber,
+        propicURL : this.state.propicURL
+      })
+    }
   }
 
   render() {

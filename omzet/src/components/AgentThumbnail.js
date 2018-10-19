@@ -8,7 +8,7 @@ class ListAgent extends Component {
       <View>
           <ListItem avatar>
             <Left>
-              <Thumbnail source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png' }} />
+              <Thumbnail source={{ uri: this.props.agent.propicURL }} />
             </Left>
               <TouchableOpacity 
                 style={{width : '100%'}}

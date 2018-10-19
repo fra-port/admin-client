@@ -63,7 +63,7 @@ class AgentDetail extends Component {
         <Content padder >
           <ScrollView>
             <View style={{alignItems: 'center'}}>
-              <Thumbnail large source={{ uri: 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png' }} />
+              <Thumbnail large source={{ uri: this.props.navigation.getParam('agent').propicURL}} />
             </View>
             <View style={{marginTop: 10, marginLeft: 20}}>
               <Text style={{fontSize: 15, marginBottom: 5}}>First name : {this.props.navigation.getParam('agent').firstName}</Text>
