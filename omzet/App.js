@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createSwitchNavigator, createStackNavigator, createBottomTabNavigator} from 'react-navigation'
+import {createSwitchNavigator, createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import { Provider } from 'react-redux'
 import { Icon } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -14,6 +14,12 @@ import Product from './src/containers/Product'
 import store from './src/store/index'
 import FormProduct from './src/components/FormProduct'
 import AddProduct from './src/components/AddProduct'
+
+const ProductStackNavigator = createStackNavigator({
+  Product,
+  FormProduct,
+  AddProduct
+})
 
 const AgentStack = createStackNavigator ({
   HomeAgent : {screen : Agent},
