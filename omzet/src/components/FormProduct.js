@@ -10,7 +10,7 @@ class FormProduct extends Component {
   static navigationOptions = {
     title: 'Product Detail',
     headerStyle: {
-      backgroundColor: '#5C6C9C',
+      backgroundColor: '#58B9FE',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {

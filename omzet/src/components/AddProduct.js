@@ -10,7 +10,7 @@ class AddProduct extends Component {
   static navigationOptions = {
     title: 'Add Product',
     headerStyle: {
-      backgroundColor: '#5C6C9C',
+      backgroundColor: '#58B9FE',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
