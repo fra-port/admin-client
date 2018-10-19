@@ -25,6 +25,7 @@ export default class ReportThumbnail extends Component {
                                 <Text>Total Item sold: {'\n'}</Text>
                                 <FlatList
                                     data={detail.listItem}
+                                    keyExtractor= {(item) => item._id}
                                     renderItem={
                                         ({ item, index }) => (
                                             <Text style={{ justifyContent: 'flex-end' }}>
@@ -43,13 +44,14 @@ export default class ReportThumbnail extends Component {
                     renderRow={(item) =>
                         <ListItem thumbnail>
                             <Left>
-                                <Thumbnail square source={require('../assets/user.png')} />
+                                <Thumbnail source={{ uri : item.sellingId.userId.propicURL}} />
                             </Left>
                             <Body>
                                 <Text style={{}}>{item.sellingId.userId.firstName} {item.sellingId.userId.lastName}</Text>
                                 <Text>List item sold:</Text>
                                 <FlatList
                                     data={item.sellingId.selling}
+                                    keyExtractor= {(item) => item._id}
                                     renderItem={
                                         ({ item, index }) => (
                                             <View>
