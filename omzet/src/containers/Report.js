@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, TouchableOpacity, FlatList, Image } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, FlatList, Image, AsyncStorage } from 'react-native'
 import { Container, Header, Content, Icon, DatePicker, Text } from 'native-base'
 import CardReport from '../components/reportCard'
 import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'
+import Octicons from 'react-native-vector-icons/Octicons'
+import firebase from 'react-native-firebase'
 
 const styles = StyleSheet.create({
   image: {
@@ -13,6 +15,22 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   }
 });
+
+const logout = (navigation) => {
+  AsyncStorage.removeItem('user')
+    .then(() => {
+      firebase.auth().signOut()
+        .then(() => {
+          navigation.navigate('Login')
+        })
+        .catch(err => {
+          navigation.navigate('Login')
+        })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
 class Report extends Component {
   constructor(props) {
@@ -41,7 +59,11 @@ class Report extends Component {
       />
     ),
     headerRight: (
-      <Icon style={{ color: "white", marginRight: 20 }} name='more' />
+      <TouchableOpacity onPress={() => {
+          logout(navigation)
+        }}>
+          <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
+      </TouchableOpacity>
     )
   });
 

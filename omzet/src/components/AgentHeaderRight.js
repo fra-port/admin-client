@@ -1,7 +1,24 @@
 import React, { Component, Fragment } from 'react';
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, AsyncStorage } from 'react-native'
 import { Icon } from 'native-base';
 import Octicons from 'react-native-vector-icons/Octicons'
+import firebase from 'react-native-firebase'
+
+const logout = (navigation) => {
+  AsyncStorage.removeItem('user')
+    .then(() => {
+      firebase.auth().signOut()
+        .then(() => {
+          navigation.navigate('Login')
+        })
+        .catch(err => {
+          navigation.navigate('Login')
+        })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
 class AgentHeaderRight extends Component {
 
@@ -15,7 +32,7 @@ class AgentHeaderRight extends Component {
           <Icon style={{ color: "white", marginRight: 20 }} name='md-person-add' />
         </TouchableOpacity>
         <TouchableOpacity onPress={() =>{
-          this.props.navigation.navigate('Login')
+          logout(this.props.navigation)
         }}>
           <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
         </TouchableOpacity>
