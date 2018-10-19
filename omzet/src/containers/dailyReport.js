@@ -22,10 +22,7 @@ export class dailyReport extends Component {
         headerTintColor: '#fff',
         headerTitleStyle: {
             width: '90%',
-        },
-        headerRight: (
-            <Icon style={{ color: "white", marginRight: 20 }} name='more' />
-        )
+        }
     });
 
     render() {

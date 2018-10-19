@@ -7,20 +7,20 @@ import firebase from 'react-native-firebase'
 
 import getProduct from '../store/product/actions'
 
-const logout = async (navigation) => {
-  let a = await firebase.auth().signOut()
-                  .then(() => {
-                      AsyncStorage.removeItem('user')
-                        .then(() => {
-                          navigation.navigate('Login')
-                        })
-                        .catch(err => {
-                          console.log(err)
-                        })
-                    })
-                  .catch(err => {
-                    console.log(err)
-                  })
+const logout = (navigation) => {
+  AsyncStorage.removeItem('user')
+    .then(() => {
+      firebase.auth().signOut()
+        .then(() => {
+          navigation.navigate('Login')
+        })
+        .catch(err => {
+          navigation.navigate('Login')
+        })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
 
 class Product extends Component {
