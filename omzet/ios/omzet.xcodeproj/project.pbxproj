@@ -413,8 +413,8 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				80E2387919354EB8BB333054 /* libRNVectorIcons.a in Frameworks */,
 				21DF3DDC6F42473CAFF73A8A /* libRNFirebase.a in Frameworks */,
+				D36C13B6F82E41F898F3D31E /* libRNVectorIcons.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +430,7 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
-				4133F521E4944C01B41F7A16 /* libRNVectorIcons-tvOS.a in Frameworks */,
+				8DA704766E5D4D42B75AD4B8 /* libRNVectorIcons-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,8 +602,8 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				3B9C74F8D96F4DC2A49A3E2C /* RNVectorIcons.xcodeproj */,
 				BEBA330EBA1C45BC8D191881 /* RNFirebase.xcodeproj */,
+				579BA2FA7A1647D795CFCA2A /* RNVectorIcons.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -625,7 +625,7 @@
 				00E356EF1AD99517003FC87E /* omzetTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				AD0806F13126475DACC47E05 /* Resources */,
+				253EB1AC8EA84BA4A254F4F9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -652,27 +652,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AD0806F13126475DACC47E05 /* Resources */ = {
+		253EB1AC8EA84BA4A254F4F9 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
-				6E3D031716E74050A41EAF38 /* Entypo.ttf */,
-				6E8E8F572CB94F93A7D4C2D7 /* EvilIcons.ttf */,
-				37E2E5B2D9904E1EA5CB200B /* Feather.ttf */,
-				55F3B876737F402C9016FF99 /* FontAwesome.ttf */,
-				B4E997F866FE4583A5DBA091 /* Foundation.ttf */,
-				B396963550494333A16B0043 /* Ionicons.ttf */,
-				4F10D5C87FB14B7B9684055B /* MaterialCommunityIcons.ttf */,
-				0AED7ED010FD4C3796F77FC3 /* MaterialIcons.ttf */,
-				4EFDB7CCC3E849E9A59119D1 /* Octicons.ttf */,
-				57B1D94F952F4C999C651F6D /* Roboto_medium.ttf */,
-				65457A382AEE4767B4F830A6 /* Roboto.ttf */,
-				3AF540803CA440C1A170AF3B /* rubicon-icon-font.ttf */,
-				67A98F6F9FDD453C86D1FDDA /* SimpleLineIcons.ttf */,
-				0F984557C6B443F2B6AD4EBD /* Zocial.ttf */,
-				07483F6E13444D6F9ABB2971 /* AntDesign.ttf */,
-				BF8D7BC094524595B8BBD6E3 /* FontAwesome5_Brands.ttf */,
-				CD061B997479472ABD2223BF /* FontAwesome5_Regular.ttf */,
-				233EC2A3C6E64E42964BF9C5 /* FontAwesome5_Solid.ttf */,
+				6AF5F6CE1B5A4DF2A4415412 /* Entypo.ttf */,
+				AC70FCE60A7A4A39B43DA7C1 /* EvilIcons.ttf */,
+				6A0B6AC79BB94082AA4D74E7 /* Feather.ttf */,
+				5C7BD7E77B6D4FFAB57ACA77 /* FontAwesome.ttf */,
+				6EB665DFDB894814B387A615 /* Foundation.ttf */,
+				F128F4BCD796485B9F05151C /* Ionicons.ttf */,
+				8628495622104CFFADF1EF24 /* MaterialCommunityIcons.ttf */,
+				0DDBC32A0AB34EA58DD782EE /* MaterialIcons.ttf */,
+				11E53BEC38864F5C913E4C69 /* Octicons.ttf */,
+				8737A11A56FF4A04B848C2C5 /* Roboto_medium.ttf */,
+				65A4AF83726D4DE78B1B9B8A /* Roboto.ttf */,
+				7929D2778A074E89979953E8 /* rubicon-icon-font.ttf */,
+				4BDF6D75BACC493B95E6DE37 /* SimpleLineIcons.ttf */,
+				52F683BD81EF4FB0B53026AE /* Zocial.ttf */,
+				D02DBAE3C95348BA96A3301D /* AntDesign.ttf */,
+				48EA5EB6834A492BACBC3D53 /* FontAwesome5_Brands.ttf */,
+				91F87BD7C18049F1932AFB12 /* FontAwesome5_Regular.ttf */,
+				E9BF7F81060A4F7D86D4F04B /* FontAwesome5_Solid.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1124,24 +1124,24 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				C0AD661C849E4026A9492AC2 /* Entypo.ttf in Resources */,
-				582A301294CC4ABBA88E8458 /* EvilIcons.ttf in Resources */,
-				E72FB25E9B664C138ED59448 /* Feather.ttf in Resources */,
-				B722DB0586CE4184831E9774 /* FontAwesome.ttf in Resources */,
-				16464881EB6D462585944F91 /* Foundation.ttf in Resources */,
-				D8CCBA4B27154050BF9F6B2D /* Ionicons.ttf in Resources */,
-				84BDBD393FC24D5F8DC47ABC /* MaterialCommunityIcons.ttf in Resources */,
-				6F421162222E4AB1BC833E6D /* MaterialIcons.ttf in Resources */,
-				6014F4EFF76D41E59DFF37E6 /* Octicons.ttf in Resources */,
-				8E07389709DA4608B9622D85 /* Roboto_medium.ttf in Resources */,
-				7D3457A6B9EE44FA8C8C95A3 /* Roboto.ttf in Resources */,
-				569C33A26D894A2C8463BB1C /* rubicon-icon-font.ttf in Resources */,
-				C6A4E19CDB87429598273ED0 /* SimpleLineIcons.ttf in Resources */,
-				206DD5A933044E96B37DF53F /* Zocial.ttf in Resources */,
-				245EB50C1AB247698DD98052 /* AntDesign.ttf in Resources */,
-				31ADF04F4A564A2184A91D39 /* FontAwesome5_Brands.ttf in Resources */,
-				6C38D67D7FF14A77ACF2D2E4 /* FontAwesome5_Regular.ttf in Resources */,
-				A2828E6D0A2242D687096E90 /* FontAwesome5_Solid.ttf in Resources */,
+				BEA3C34B15E14D5EBDE44BA7 /* Entypo.ttf in Resources */,
+				40608CE89B2347AEAD47D81B /* EvilIcons.ttf in Resources */,
+				9074DE77B21F4A52B1B0158F /* Feather.ttf in Resources */,
+				088B356B5F834D9BA4FDDF06 /* FontAwesome.ttf in Resources */,
+				EEAE64141C364EEFA263E694 /* Foundation.ttf in Resources */,
+				A256CF3DE21B42D781D94B87 /* Ionicons.ttf in Resources */,
+				2110666D6D6941EE8124171C /* MaterialCommunityIcons.ttf in Resources */,
+				1BD0C343A8FD41CDA6798BD5 /* MaterialIcons.ttf in Resources */,
+				2554C7F8D8F1493FBDEA44D3 /* Octicons.ttf in Resources */,
+				2D94E44E6E7744C6A4039F18 /* Roboto_medium.ttf in Resources */,
+				4852BC57F7BF49D58D95AB9D /* Roboto.ttf in Resources */,
+				923654774CFE41028FF33CCB /* rubicon-icon-font.ttf in Resources */,
+				0CC1C30AC3FA44E4A7ADADD3 /* SimpleLineIcons.ttf in Resources */,
+				780F6C27BF7143B1A140611A /* Zocial.ttf in Resources */,
+				E7299E0D9BB74C55A1EA5E4A /* AntDesign.ttf in Resources */,
+				ED02E685DAC94A928A505BF8 /* FontAwesome5_Brands.ttf in Resources */,
+				F4244168E0A841A3911E30CF /* FontAwesome5_Regular.ttf in Resources */,
+				3107008798FE4359B9FF20E3 /* FontAwesome5_Solid.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
