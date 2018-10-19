@@ -2,8 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import agentReducer from './fetchAgent/reducer'
 
+import product from './product/reducers'
+
 const rootReducers = combineReducers({
-  agentReducer
+  agentReducer,
+  product
 })
 
 const store = createStore(

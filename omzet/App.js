@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {createSwitchNavigator, createStackNavigator, createBottomTabNavigator} from 'react-navigation'
+import {createSwitchNavigator, createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import { Provider } from 'react-redux'
 import { Icon } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -12,6 +12,14 @@ import AgentAdd from './src/containers/AgentAdd'
 import AgentEdit from './src/containers/AgentEdit'
 import Product from './src/containers/Product'
 import store from './src/store/index'
+import FormProduct from './src/components/FormProduct'
+import AddProduct from './src/components/AddProduct'
+
+const ProductStackNavigator = createStackNavigator({
+  Product,
+  FormProduct,
+  AddProduct
+})
 
 const AgentStack = createStackNavigator ({
   HomeAgent : {screen : Agent},
@@ -25,7 +33,7 @@ const AgentStack = createStackNavigator ({
 const BotttomNav = createBottomTabNavigator({
   Report: {screen : Report},
   Agent: {screen : AgentStack},
-  Product: {screen : Product}
+  Product: {screen : ProductStackNavigator}
 },
 {
   navigationOptions: ({ navigation }) => ({
@@ -37,7 +45,7 @@ const BotttomNav = createBottomTabNavigator({
       } else if (routeName === 'Agent') {
         icon = <Octicons name='organization' size={25} color={tintColor} />
       } else if (routeName === 'Product') {
-        icon = <Ionicons name='ios-home' size={25} color={tintColor} />
+        icon = <Ionicons name='ios-menu' size={25} color={tintColor} />
       }
       return icon
     }
