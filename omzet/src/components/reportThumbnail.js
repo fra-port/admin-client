@@ -12,7 +12,7 @@ export default class ReportThumbnail extends Component {
                 <Card>
                     <CardItem header bordered>
                         <Body>
-                            <Text style={{ fontSize: 50 }}>Today Result </Text>
+                            <Text style={{ fontSize: 50 }}>Result </Text>
                         </Body>
                     </CardItem>
                     <CardItem>

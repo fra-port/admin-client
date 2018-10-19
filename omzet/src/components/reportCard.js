@@ -32,7 +32,7 @@ export class CardReport extends Component {
 
             <Card>
                 <CardItem header bordered>
-                    <Text>Today Report {this.props.date}</Text>
+                    <Text>Daily Report</Text>
                 </CardItem>
                 <CardItem bordered>
                     <Body style={{ flexDirection: 'row' }}>
@@ -40,9 +40,6 @@ export class CardReport extends Component {
                             Total income : {report.totalIncome} {'\n'}
                             Total agen : {report.totalReport} {'\n'}
                         </Text>
-                        {/* <Text style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            Total income : 50.0000
-                                         </Text> */}
                     </Body>
                 </CardItem>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('DailyReport', { detail: report })}>
@@ -52,37 +49,6 @@ export class CardReport extends Component {
                 </TouchableOpacity>
             </Card>
 
-            // <View>
-            //     <FlatList
-            //         data={this.props.reports.result}
-            //         renderItem={
-            //             ({ item, index }) => (
-            //                 <Card>
-            //                     <CardItem header bordered>
-            //                         <Text>{item.totalIncome}</Text>
-            //                     </CardItem>
-            //                     <CardItem bordered>
-            //                         <Body style={{ flexDirection: 'row' }}>
-            //                             <Text style={{ paddingRight: 10 }}>
-            //                                 Total income : 50.000 {'\n'}
-            //                                 Total agen : 4 {'\n'}
-            //                                 Total Item Sold: 17 {'\n'}
-            //                             </Text>
-            //                             <Text style={{ justifyContent: 'center', alignItems: 'center' }}>
-            //                                 Total income : 50.0000
-            //                              </Text>
-            //                         </Body>
-            //                     </CardItem>
-            //                     <TouchableOpacity onPress={() => this.props.navigation.navigate('DailyReport')}>
-            //                         <CardItem footer bordered>
-            //                             <Text>Detail..</Text>
-            //                         </CardItem>
-            //                     </TouchableOpacity>
-            //                 </Card>
-            //             )
-            //         }
-            //     />
-            // </View>
         );
     }
 }

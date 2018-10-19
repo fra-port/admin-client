@@ -14,12 +14,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-    
-//   }
-// }
-
 class Report extends Component {
   constructor(props) {
     super(props)
@@ -34,7 +28,7 @@ class Report extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Report',
     headerStyle: {
-      backgroundColor: '#5C6C9C',
+      backgroundColor: '#58B9FE',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -67,7 +61,7 @@ class Report extends Component {
             androidMode={"default"}
             placeHolderText="Select date"
             textStyle={{ color: "green" }}
-            placeHolderTextStyle={{ color: "#d3d3d3" }}
+            placeHolderTextStyle={{ color: "#0f0505" }}
             onDateChange={this.setDate}
           />
           <Text>

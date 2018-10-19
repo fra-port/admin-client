@@ -17,7 +17,7 @@ export class dailyReport extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Detail Report',
         headerStyle: {
-            backgroundColor: '#5C6C9C',
+            backgroundColor: '#58B9FE',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

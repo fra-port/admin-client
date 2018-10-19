@@ -10,7 +10,7 @@ class Product extends Component {
     return {
       title: 'Product',
       headerStyle: {
-        backgroundColor: '#5C6C9C',
+        backgroundColor: '#58B9FE',
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
