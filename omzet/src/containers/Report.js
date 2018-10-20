@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 15,
     resizeMode: 'contain'
+  },
+
+  rowStyle: {
+    flex: 1,
+    flexDirection: "row"
   }
 });
 
@@ -60,9 +65,9 @@ class Report extends Component {
     ),
     headerRight: (
       <TouchableOpacity onPress={() => {
-          logout(navigation)
-        }}>
-          <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
+        logout(navigation)
+      }}>
+        <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
       </TouchableOpacity>
     )
   });
@@ -71,21 +76,23 @@ class Report extends Component {
     return (
       <Container>
         <Content padder>
-
-          <DatePicker
-            defaultDate={new Date()}
-            minimumDate={new Date(2018, 1, 1)}
-            maximumDate={new Date(2018, 12, 31)}
-            locale={"en"}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            placeHolderText="Select date"
-            textStyle={{ color: "green" }}
-            placeHolderTextStyle={{ color: "#0f0505" }}
-            onDateChange={this.setDate}
-          />
+          <View style={styles.rowStyle}>
+            <Octicons name='calendar' size={25} style={{marginLeft: 10, marginTop: 4 }} />
+            <DatePicker
+              defaultDate={new Date()}
+              minimumDate={new Date(2018, 1, 1)}
+              maximumDate={new Date(2018, 12, 31)}
+              locale={"en"}
+              timeZoneOffsetInMinutes={undefined}
+              modalTransparent={false}
+              animationType={"fade"}
+              androidMode={"default"}
+              placeHolderText="Select date"
+              textStyle={{ color: "green" }}
+              placeHolderTextStyle={{ color: "#0f0505" }}
+              onDateChange={this.setDate}
+            />
+          </View>
           <Text>
             Date: {this.state.chosenDate.toString().substr(4, 12)}
           </Text>
