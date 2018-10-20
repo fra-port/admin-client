@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, FlatList, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { Card, CardItem, Text, Body } from "native-base";
 import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'

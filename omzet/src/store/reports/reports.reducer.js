@@ -2,7 +2,8 @@ const initialState = {
     isLoading: false,
     isError: false,
     reports: [],
-    report: {}
+    report: {},
+    reportsUser:[],
 }
 
 const reportsReducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const reportsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 report: action.payload,
+                isLoading: false
+            }
+        case 'GET_REPORTS_USER':
+            return {
+                ...state,
+                reportsUser: action.payload,
                 isLoading: false
             }
         default:

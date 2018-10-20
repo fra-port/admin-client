@@ -96,7 +96,6 @@ class Report extends Component {
           <Text>
             Date: {this.state.chosenDate.toString().substr(4, 12)}
           </Text>
-
           <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()}></CardReport>
         </Content>
       </Container>

@@ -83,6 +83,7 @@ export default class ReportThumbnail extends Component {
                         <Card>
                             <List
                                 dataArray={detail.result}
+                                key= {(item) => item._id}
                                 renderRow={(item) =>
                                     <ListItem thumbnail>
                                         <Left>
@@ -93,6 +94,7 @@ export default class ReportThumbnail extends Component {
                                             <Text>List item sold:</Text>
                                             <FlatList
                                                 data={item.sellingId.selling}
+                                                keyExtractor= {(item) => item._id}
                                                 renderItem={
                                                     ({ item, index }) => (
                                                         <View>
