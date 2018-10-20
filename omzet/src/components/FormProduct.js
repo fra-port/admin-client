@@ -75,7 +75,7 @@ class FormProduct extends Component {
           </Form>
 
           <Container style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-            <Button primary style={{ marginRight: 20 }} onPress={ () => this.updateProduct() }><Text> Update </Text></Button>
+            <Button success style={{ marginRight: 20 }} onPress={ () => this.updateProduct() }><Text> Update </Text></Button>
             <Button danger onPress={ () => this.deleteProduct() }><Text> Delete </Text></Button>
           </Container>
         </Content>

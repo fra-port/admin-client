@@ -25,11 +25,9 @@ export class CardReport extends Component {
         this.props.getAll(this.props.date)
     }
 
-
     render() {
-        const report = this.props.reports
+        const report = this.props
         return (
-
             <Card>
                 <CardItem header bordered>
                     <Text>Daily Report</Text>
@@ -37,8 +35,8 @@ export class CardReport extends Component {
                 <CardItem bordered>
                     <Body style={{ flexDirection: 'row' }}>
                         <Text style={{ paddingRight: 10 }}>
-                            Total income : {report.totalIncome} {'\n'}
-                            Total agen : {report.totalReport} {'\n'}
+                            Total income : {report.reports.totalIncome} {'\n'}
+                            Total agen : {report.reports.totalReport} {'\n'}
                         </Text>
                     </Body>
                 </CardItem>
