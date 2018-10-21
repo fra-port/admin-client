@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {ActivityIndicator, TouchableOpacity, ScrollView} from 'react-native'
-import { View, Text, Card, CardItem, Body} from 'native-base';
+import { View, Text, Card, CardItem, Body, Spinner} from 'native-base';
 import { connect } from 'react-redux'
 import getReportMonth from '../store/reports/reports.month.actoin'
 
@@ -47,7 +47,7 @@ class DetailReportMonth extends Component {
       <ScrollView>
       <View>
         {
-          this.props.reportsMonthLoading ? <ActivityIndicator size="large" color="#0000ff" /> :
+          this.props.reportsMonthLoading ? <Spinner size="large" color="#58B9FE" style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 30}}/> :
           <Card>
                 <CardItem header bordered>
                     <Text>Monthly Report </Text>
