@@ -63,7 +63,7 @@ export default class ReportThumbnail extends Component {
                                         newList.map((data, i) => {
                                             return (
                                                 <View style={{ backgroundColor: data.color, paddingHorizontal: 5 }}>
-                                                    <Text key={i}>{data.name}</Text>
+                                                    <Text>{data.name}</Text>
                                                 </View>
                                             )
                                         })
@@ -104,34 +104,6 @@ export default class ReportThumbnail extends Component {
                                     }>
                                 </List>
                             </Card>
-                        <Card>
-                            <List
-                                dataArray={detail.result}
-                                key= {(item) => item._id}
-                                renderRow={(item) =>
-                                    <ListItem thumbnail>
-                                        <Left>
-                                            <Thumbnail source={{ uri: item.sellingId.userId.propicURL }} />
-                                        </Left>
-                                        <Body>
-                                            <Text style={{}}>{item.sellingId.userId.firstName} {item.sellingId.userId.lastName}</Text>
-                                            <Text>List item sold:</Text>
-                                            <FlatList
-                                                data={item.sellingId.selling}
-                                                keyExtractor= {(item) => item._id}
-                                                renderItem={
-                                                    ({ item, index }) => (
-                                                        <View>
-                                                            <Text note numberOfLines={1}>{item.itemName} = {item.quantity} pcs = Rp {item.Total.toLocaleString()}</Text>
-                                                        </View>
-                                                    )
-                                                }
-                                            />
-                                        </Body>
-                                    </ListItem>
-                                }>
-                            </List>
-                        </Card>
                         </View>
 
                     }
