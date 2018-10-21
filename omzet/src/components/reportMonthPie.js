@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10,
         justifyContent: 'center',
-        flexDirection: "row"
+        flexDirection: "row",
+        flexWrap: 'wrap'
     }
 });

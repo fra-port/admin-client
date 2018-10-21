@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Form, Item, Input, Label } from 'native-base';
+import { Form, Item, Input, Label, Spinner } from 'native-base';
 import firebase from 'react-native-firebase'
 
 class Login extends Component {
@@ -9,7 +8,8 @@ class Login extends Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      loading: false
     }
   }
 
@@ -17,23 +17,28 @@ class Login extends Component {
     if (this.state.email === '' || this.state.password === '') {
       alert('email/password must be filled')
     } else {
-      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(data => {
-          AsyncStorage.setItem('user', JSON.stringify(data.user))
-          this.props.navigation.navigate('Home')
-        })
-        .catch(err => {
-          let errCode = err.code
-          let errMessage = err.message
-
-          if (errCode === 'auth/invalid-email') {
-            alert('Wrong email format!')
-          } else if (errCode === 'auth/user-not-found') {
-            alert('User not found! Wrong email address or password!')
-          } else {
-            alert(errMessage)
-          }
-        })
+      this.setState({loading: true}, () => {
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+          .then(data => {
+            this.setState({loading:false}, () => {
+              AsyncStorage.setItem('user', JSON.stringify(data.user))
+              this.props.navigation.navigate('Home')
+            })
+          })
+          .catch(err => {
+            this.setState({loading:false}, () => {
+              let errCode = err.code
+              let errMessage = err.message
+              if (errCode === 'auth/invalid-email') {
+                alert('Wrong email format!')
+              } else if (errCode === 'auth/user-not-found') {
+                alert('User not found! Wrong email address or password!')
+              } else {
+                alert(errMessage)
+              }
+            })
+          })
+      })
     }
   }
 
@@ -69,6 +74,7 @@ class Login extends Component {
           <TouchableOpacity onPress={this.handleLogin} style={styles.touchButton}>
             <Text style={{ textAlign: 'center', paddingVertical: 10, fontWeight: 'bold' }}>Login</Text>
           </TouchableOpacity>
+          {this.state.loading && <Spinner color="white"/>}
         </ScrollView>
       </View>
     )

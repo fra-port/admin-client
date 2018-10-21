@@ -84,7 +84,7 @@ class Product extends Component {
                   })
                 }
               </List>
-            ) : <Spinner color='blue' />
+            ) : <Spinner color='#58B9FE' />
           }
         </Content>
       </Container>
