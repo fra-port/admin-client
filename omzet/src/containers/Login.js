@@ -13,18 +13,6 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('user')
-      .then(data => {
-        if (data) {
-          this.props.navigation.navigate('Home')
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
   handleLogin = () => {
     if (this.state.email === '' || this.state.password === '') {
       alert('email/password must be filled')

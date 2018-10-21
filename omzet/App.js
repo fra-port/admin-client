@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createSwitchNavigator, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import {Alert, AsyncStorage} from 'react-native'
 import { Provider } from 'react-redux'
 import { Icon } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -81,27 +82,60 @@ const BotttomNav = createBottomTabNavigator({
     backBehavior: 'none',
   })
 
-const SwitchNav = createSwitchNavigator(
-  {
-    Login: { screen: Login },
-    Home: { screen: BotttomNav }
-  },
-  {
-    initialRouteName: 'Login'
-  }
-)
+const SwitchNav = (isSingnedIn) => {
+  return createSwitchNavigator(
+    {
+      Home: { screen: BotttomNav },
+      Login: { screen: Login }
+    },
+    {
+      initialRouteName: isSingnedIn ? 'Home' : 'Login'
+    }
+  )
+}
+
+const checkSignedIn = () => {
+  return new Promise((resolve, reject) => {
+    AsyncStorage.getItem('user')
+      .then(res => {
+        if (res !== null) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      })
+      .catch(err => reject(err));
+  });
+};
 
 export default class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+        isSignedIn: false,
+        signInChecked: false,
+      };
+  }
+
   componentDidMount() {
-    // do stuff while splash screen is shown
-      // After having done stuff (such as async tasks) hide the splash screen
-      SplashScreen.hide();
+    SplashScreen.hide();
+    checkSignedIn()
+      .then(result => {
+        this.setState({isSignedIn: result, signInChecked:true})
+      })
+      .catch((err) => {
+        Alert.alert(err)
+      })
   }
 
   render() {
+    if (!this.state.signInChecked) {
+      return null;
+    }
+    const RootNav = SwitchNav(this.state.isSignedIn)
     return (
       <Provider store={store}>
-        <SwitchNav />
+        <RootNav />
       </Provider>
     );
   }
