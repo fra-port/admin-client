@@ -4,18 +4,33 @@ import { Card } from 'native-base'
 import MonthSelectorCalendar from 'react-native-month-selector'
 import moment from 'moment'
 import Octicons from 'react-native-vector-icons/Octicons'
-import DetailMonth from '../components/detailReportMonth'
+// import DetailMonth from '../components/detailReportMonth'
 import DetailReportMonth from '../components/detailReportMonth';
 
 
 export default class ReportMonth extends Component {
+
+
     constructor(props) {
         super()
         this.state = {
-            month: moment(new Date(), 'MM YYYY'),
+            month: moment(new Date(), 'MMM YYYY'),
             status: false
         }
     }
+
+    convertMonth = (data) => {
+
+        if (typeof data._i == 'string') {
+            return this.state.month.format('MMM YYYY')
+        } else {
+            let temp = new Date(data._i)
+            let month = temp.getMonth()
+            let monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            return `${monthName[month]} ${this.state.month.format('YYYY')}`
+        }
+    }
+
     render() {
         return (
             <View>
@@ -25,24 +40,23 @@ export default class ReportMonth extends Component {
                         <Text> Select Month </Text>
                     </TouchableOpacity>
                 </View>
-
-                <Card>
-                    {
-                        this.state.status && <View style={{ padding: 30 }}>
+                {
+                    this.state.status && <Card> 
+                        <View style={{ padding: 30 }}>
                             <Text>
                                 Selected Month is {this.state.month && this.state.month.format('MM YYYY')}
                             </Text>
                             <MonthSelectorCalendar
                                 selectedDate={this.state.month}
-                                monthTapped={(date) => this.setState({ month: date, status: false })}
+                                monthTapped={(date) => this.setState({ month: moment(date, 'MMM YYYY'), status: false })}
                             />
                         </View>
-                    }
-                </Card>
+                    </Card>
+                }
                 <Text>
-                    Selected Month is {this.state.month.format('MM YYYY')}
+                    Month :  {this.convertMonth(this.state.month)}
                 </Text>
-                <DetailReportMonth date={this.state.month} navigation={this.props.navigation}/>
+                <DetailReportMonth date={this.state.month} navigation={this.props.navigation} />
             </View>
         )
     }

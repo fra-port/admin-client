@@ -63,7 +63,7 @@ export default class ReportThumbnail extends Component {
                                         newList.map((data, i) => {
                                             return (
                                                 <View style={{ backgroundColor: data.color, paddingHorizontal: 5 }}>
-                                                    <Text>{data.name}</Text>
+                                                    <Text key={i}>{data.name}</Text>
                                                 </View>
                                             )
                                         })

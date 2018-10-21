@@ -5,22 +5,53 @@ import { connect } from 'react-redux'
 import getReportMonth from '../store/reports/reports.month.actoin'
 
 class DetailReportMonth extends Component {
+  constructor() {
+    super()
+    this.state = {
+      month: ''
+    }
+  }
+
   componentDidMount = () => {
     let date = this.props.date
+    
     let d = new Date(date._i)
-    let month = d.getMonth() + 1
-    this.props.getMonthReport(month)
+    let newMonth = d.getMonth() + 1
+    this.setState({
+      month: newMonth
+    })
+    this.props.getMonthReport(newMonth)
+  }
+
+  componentDidUpdate = () => {
+    let date = this.props.date
+    let d = new Date(date._i)
+
+    let newMonth = ''
+    if (typeof date._i == 'string') {
+      newMonth = d.getDate() 
+    } else {
+      newMonth = d.getMonth() + 1
+    }
+  
+    
+    if (this.state.month !== newMonth) {
+      this.setState({
+        month: newMonth
+      })
+      this.props.getMonthReport(newMonth)
+    }
   }
   render() {
     return (
       <ScrollView>
       <View>
-        <Text>detail DetailReportMonth </Text>
         {
           this.props.reportsMonthLoading ? <ActivityIndicator size="large" color="#0000ff" /> :
           <Card>
                 <CardItem header bordered>
-                    <Text>Daily Report</Text>
+                    <Text>Monthly Report </Text>
+                    
                 </CardItem>
                 <CardItem bordered>
                     <Body style={{ flexDirection: 'row' }}>

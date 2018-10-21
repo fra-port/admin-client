@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
-import {FlatList} from 'react-native'
+import { FlatList, StyleSheet, ScrollView } from 'react-native'
 import { View, Card, Text, Body, CardItem } from 'native-base';
-
+import PieChart from 'react-native-pie-chart';
 
 export default class ReportMonthPie extends Component {
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Detail Report Monthy',
+        headerStyle: {
+            backgroundColor: '#58B9FE',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            width: '90%',
+        }
+    });
+    
     render() {
         const detail = this.props.navigation.state.params.detail.data.obj
-        console.log(detail);
-        
         const serie = []
         const newList = detail.listItem
         detail.listItem.forEach(item => {
@@ -21,38 +30,93 @@ export default class ReportMonthPie extends Component {
 
         const chart_wh = 250
         return (
-            <View>
-                <Card>
-                    <CardItem header bordered>
-                        <Body>
-                            <Text style={{ fontSize: 40 }}>Result </Text>
-                            {/* <Text>Date: {date}</Text> */}
-                        </Body>
-                    </CardItem>
-                    <CardItem>
-                        <Body style={{ flexDirection: 'row', padding: 10 }}>
-                            <Text>
-                                Total income : {detail.incomeMonth} {'\n'}
-                                Total agen : {detail.users.listUsers.length} {'\n'}
-                            </Text>
+            <ScrollView>
+                <View style={{ padding: 10 }}>
+                    <Card>
+                        <CardItem header bordered>
                             <Body>
-                                <Text>Total Item sold: {'\n'}</Text>
-                                <FlatList
-                                    data={detail.listItem}
-                                    keyExtractor={(item) => item._id}
-                                    renderItem={
-                                        ({ item, index }) => (
-                                            <Text style={{ justifyContent: 'flex-end' }}>
-                                                {item.name}  = {item.totalSelling} pcs
-                                            </Text>
-                                        )
-                                    }
-                                />
+                                <Text style={{ fontSize: 40 }}>Result </Text>
                             </Body>
-                        </Body>
-                    </CardItem>
-                </Card>
-            </View>
+                        </CardItem>
+                        <CardItem>
+                            <Body style={{ flexDirection: 'row', padding: 10 }}>
+                                <Text>
+                                    Total income : {detail.incomeMonth} {'\n'}
+                                    Total agen : {detail.users.listUsers.length} {'\n'}
+                                </Text>
+                                <Body>
+                                    <Text>Total Item sold: {'\n'}</Text>
+                                    <FlatList
+                                        data={detail.listItem}
+                                        keyExtractor={(item) => item._id}
+                                        renderItem={
+                                            ({ item, index }) => (
+                                                <Text style={{ justifyContent: 'flex-end' }}>
+                                                    {item.name}  = {item.totalSelling} pcs
+                                            </Text>
+                                            )
+                                        }
+                                    />
+                                </Body>
+                            </Body>
+                        </CardItem>
+                    </Card>
+                    <View>
+                        {
+                            detail.incomeMonth > 0 &&
+                            <View>
+                                <Card style={{ padding: 15 }}>
+                                    <View style={styles.rowStyle}>
+                                        {
+                                            newList.map((data, i) => {
+                                                return (
+                                                    <View style={{ backgroundColor: data.color, paddingHorizontal: 5 }}>
+
+                                                        <Text>{data.name}</Text>
+                                                    </View>
+                                                )
+                                            })
+                                        }
+                                    </View>
+                                    <View style={styles.container}>
+                                        <Text style={styles.title}>Chart Report</Text>
+                                        <PieChart
+                                            chart_wh={chart_wh}
+                                            series={serie}
+                                            sliceColor={sliceColor}
+                                        />
+                                    </View>
+                                </Card>
+                            </View>
+                        }
+
+                    </View>
+                </View>
+            </ScrollView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 24,
+        margin: 10
+    },
+
+    columnStyle: {
+        flex: 1,
+        borderWidth: 0.5,
+        borderColor: "red"
+    },
+
+    rowStyle: {
+        flex: 1,
+        marginTop: 10,
+        justifyContent: 'center',
+        flexDirection: "row"
+    }
+});

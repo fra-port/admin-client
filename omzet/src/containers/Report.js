@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
   rowStyle: {
     flex: 1,
     flexDirection: "row"
+  },
+
+  title: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
@@ -77,8 +84,11 @@ class Report extends Component {
     return (
       <Container>
         <Content padder>
+          <View style={styles.title}>
+            <Text>Report By Date</Text>
+          </View>
           <View style={styles.rowStyle}>
-            <Octicons name='calendar' size={25} style={{marginLeft: 10, marginTop: 4 }} />
+            <Octicons name='calendar' size={25} style={{ marginLeft: 10, marginTop: 4 }} />
             <DatePicker
               defaultDate={new Date()}
               minimumDate={new Date(2018, 1, 1)}
@@ -98,7 +108,10 @@ class Report extends Component {
             Date: {this.state.chosenDate.toString().substr(4, 12)}
           </Text>
           <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()}></CardReport>
-          <ReportMonth navigation={this.props.navigation}/>
+          <View style={styles.title}>
+            <Text>Report By Month</Text>
+          </View>
+          <ReportMonth navigation={this.props.navigation} />
         </Content>
       </Container>
     )
