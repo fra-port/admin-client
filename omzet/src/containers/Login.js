@@ -47,7 +47,7 @@ class Login extends Component {
             <Image
               style={{ height: 180, width: 250, marginBottom: 10 }}
               resizeMode="contain"
-              source={require('../omzet-logo.png')}
+              source={require('../assets/omzet-logo.png')}
             />
           </View>
           <View style={{ alignItems: 'center' }}>

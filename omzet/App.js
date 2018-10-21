@@ -18,6 +18,8 @@ import AddProduct from './src/components/AddProduct'
 import DailyReportScreen from './src/containers/dailyReport'
 import DetailReportScreen from './src/containers/detailReport'
 import SplashScreen from 'react-native-splash-screen'
+import ReportMonthPie from './src/components/reportMonthPie'
+import DetailReportMonth from './src/components/detailReportMonth'
 
 const ProductStackNavigator = createStackNavigator({
   Product,
@@ -44,7 +46,15 @@ const StackNavReport = createStackNavigator({
   },
   DetailReport: {
     screen: DetailReportScreen
+  },
+  MonthlyReport: {
+    screen: ReportMonthPie
+  },
+  DetailReportMonth: {
+    screen: DetailReportMonth
   }
+
+  
 }, {
     initialRouteName: 'ReportHome'
   })
