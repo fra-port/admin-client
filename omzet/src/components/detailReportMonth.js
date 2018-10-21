@@ -24,22 +24,18 @@ class DetailReportMonth extends Component {
   }
 
   componentDidUpdate = () => {
-    let date = this.props.date
-    let d = new Date(date._i)
 
-    let newMonth = ''
-    if (typeof date._i == 'string') {
-      newMonth = d.getDate() 
-    } else {
-      newMonth = d.getMonth() + 1
-    }
-  
+
+    let date = this.props.date
     
+    let d = new Date(date._i)
+    let newMonth = d.getMonth() + 1
     if (this.state.month !== newMonth) {
       this.setState({
         month: newMonth
+      }, () => {
+        this.props.getMonthReport(newMonth)
       })
-      this.props.getMonthReport(newMonth)
     }
   }
   render() {
