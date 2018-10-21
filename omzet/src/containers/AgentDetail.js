@@ -62,7 +62,6 @@ class AgentDetail extends Component {
 
   render() {
     return (
-      <ScrollView>
         <Container >
           <Content padder >
             <View style={{ alignItems: 'center' }}>
@@ -84,12 +83,9 @@ class AgentDetail extends Component {
                 <Text style={{ textAlign: 'center', color: 'white' }}>Delete</Text>
               </Button>
             </View>
-          </Content>
-          <Content padder>
             <CardReportUser userId={this.props.navigation.getParam('agent')._id}></CardReportUser>
           </Content>
         </Container>
-      </ScrollView>
     );
   }
 }
