@@ -8,8 +8,6 @@ export default class ReportThumbnail extends Component {
     render() {
         const detail = this.props.detail.reports
         let date = this.props.detail.date
-
-
         const serie = []
         const newList = detail.listItem
 
@@ -59,7 +57,7 @@ export default class ReportThumbnail extends Component {
                     {
                         detail.result.length > 0 &&
                         <View>
-                            <Card style={{padding: 15}}>
+                            <Card style={{ padding: 15 }}>
                                 <View style={styles.rowStyle}>
                                     {
                                         newList.map((data, i) => {
@@ -69,16 +67,42 @@ export default class ReportThumbnail extends Component {
                                                 </View>
                                             )
                                         })
-                                }
+                                    }
                                 </View>
                                 <View style={styles.container}>
-                                <Text style={styles.title}>Chart Report</Text>
-                                <PieChart
-                                    chart_wh={chart_wh}
-                                    series={serie}
-                                    sliceColor={sliceColor}
-                                />
-                            </View>
+                                    <Text style={styles.title}>Chart Report</Text>
+                                    <PieChart
+                                        chart_wh={chart_wh}
+                                        series={serie}
+                                        sliceColor={sliceColor}
+                                    />
+                                </View>
+                            </Card>
+                            <Card>
+                                <List
+                                    dataArray={detail.result}
+                                    renderRow={(item) =>
+                                        <ListItem thumbnail>
+                                            <Left>
+                                                <Thumbnail source={{ uri: item.sellingId.userId.propicURL }} />
+                                            </Left>
+                                            <Body>
+                                                <Text style={{}}>{item.sellingId.userId.firstName} {item.sellingId.userId.lastName}</Text>
+                                                <Text>List item sold:</Text>
+                                                <FlatList
+                                                    data={item.sellingId.selling}
+                                                    renderItem={
+                                                        ({ item, index }) => (
+                                                            <View>
+                                                                <Text note numberOfLines={1}>{item.itemName} = {item.quantity} pcs = Rp {item.Total.toLocaleString()}</Text>
+                                                            </View>
+                                                        )
+                                                    }
+                                                />
+                                            </Body>
+                                        </ListItem>
+                                    }>
+                                </List>
                             </Card>
                         <Card>
                             <List
@@ -110,7 +134,7 @@ export default class ReportThumbnail extends Component {
                         </Card>
                         </View>
 
-                }
+                    }
                 </ View>
 
             </View>

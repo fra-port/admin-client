@@ -22,7 +22,7 @@ export class CardReport extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        this.props.getAll(this.props.date)
+        // this.props.getAll(this.props.date)
     }
 
     render() {

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'
 import Octicons from 'react-native-vector-icons/Octicons'
 import firebase from 'react-native-firebase'
+import ReportMonth from '../components/reportMonth'
 
 const styles = StyleSheet.create({
   image: {
@@ -97,6 +98,7 @@ class Report extends Component {
             Date: {this.state.chosenDate.toString().substr(4, 12)}
           </Text>
           <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()}></CardReport>
+          <ReportMonth navigation={this.props.navigation}/>
         </Content>
       </Container>
     )
