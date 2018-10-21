@@ -48,7 +48,7 @@ export default class ReportMonth extends Component {
                             </Text>
                             <MonthSelectorCalendar
                                 selectedDate={this.state.month}
-                                monthTapped={(date) => this.setState({ month: moment(date, 'MMM YYYY'), status: false })}
+                                monthTapped={(date) => this.setState({ month: moment(new Date(date), 'MMM YYYY'), status: false })}
                             />
                         </View>
                     </Card>
