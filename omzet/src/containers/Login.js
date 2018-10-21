@@ -26,31 +26,35 @@ class Login extends Component {
   }
 
   handleLogin = () => {
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(data => {
-        AsyncStorage.setItem('user', JSON.stringify(data.user))
-        this.props.navigation.navigate('Home')
-      })
-      .catch(err => {
-        let errCode = err.code
-        let errMessage = err.message
+    if (this.state.email === '' || this.state.password === '') {
+      alert('email/password must be filled')
+    } else {
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(data => {
+          AsyncStorage.setItem('user', JSON.stringify(data.user))
+          this.props.navigation.navigate('Home')
+        })
+        .catch(err => {
+          let errCode = err.code
+          let errMessage = err.message
 
-        if (errCode === 'auth/invalid-email'){
-          alert('Wrong email format!')
-        } else if (errCode === 'auth/user-not-found') {
-          alert('User not found! Wrong email address or password!')
-        } else {
-          alert(errMessage)
-        }
-      })
+          if (errCode === 'auth/invalid-email') {
+            alert('Wrong email format!')
+          } else if (errCode === 'auth/user-not-found') {
+            alert('User not found! Wrong email address or password!')
+          } else {
+            alert(errMessage)
+          }
+        })
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={{ marginTop: 80}}>
+        <ScrollView style={{ marginTop: 80 }}>
           <View style={{
-           marginHorizontal: -20
+            marginHorizontal: -20
           }}>
             <Image
               style={{ height: 180, width: 250, marginBottom: 10 }}
@@ -58,9 +62,9 @@ class Login extends Component {
               source={require('../omzet-logo.png')}
             />
           </View>
-          <View style={{alignItems: 'center'}}>
-          <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO THE OMZET</Text>
-          <Text style={{ color: "white"}} >Apps for daily omzet reporting</Text>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO THE OMZET</Text>
+            <Text style={{ color: "white" }} >Apps for daily omzet reporting test</Text>
           </View>
           <View style={{ width: 200 }}>
             <Form>
