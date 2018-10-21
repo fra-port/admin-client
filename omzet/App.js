@@ -16,6 +16,7 @@ import FormProduct from './src/components/FormProduct'
 import AddProduct from './src/components/AddProduct'
 import DailyReportScreen from './src/containers/dailyReport'
 import DetailReportScreen from './src/containers/detailReport'
+import SplashScreen from 'react-native-splash-screen'
 
 const ProductStackNavigator = createStackNavigator({
   Product,
@@ -91,6 +92,12 @@ const SwitchNav = createSwitchNavigator(
 )
 
 export default class App extends Component {
+  componentDidMount() {
+    // do stuff while splash screen is shown
+      // After having done stuff (such as async tasks) hide the splash screen
+      SplashScreen.hide();
+  }
+
   render() {
     return (
       <Provider store={store}>
