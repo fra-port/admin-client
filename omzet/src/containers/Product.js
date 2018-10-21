@@ -1,27 +1,9 @@
-import React, { Component, Fragment } from 'react'
-import { Image, TouchableOpacity, AsyncStorage } from 'react-native'
+import React, {Component, Fragment} from 'react'
+import { Image, TouchableOpacity } from 'react-native'
 import { Icon, Container, Content, List, ListItem, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
-import Octicons from 'react-native-vector-icons/Octicons'
-import firebase from 'react-native-firebase'
 
 import getProduct from '../store/product/actions'
-
-const logout = (navigation) => {
-  AsyncStorage.removeItem('user')
-    .then(() => {
-      firebase.auth().signOut()
-        .then(() => {
-          navigation.navigate('Login')
-        })
-        .catch(err => {
-          navigation.navigate('Login')
-        })
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
 
 class Product extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -48,14 +30,10 @@ class Product extends Component {
       headerRight: (
         <Fragment>
           <TouchableOpacity onPress={() => navigation.navigate('AddProduct', { navigate: navigation.navigate })}>
-            <Icon style={{ color: 'white', marginRight: 30 }} name='add' />
+            <Icon style={{ color: 'white', marginRight: 30 }} name='add'/>
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => {
-            logout(navigation)
-          }}>
-            <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
-          </TouchableOpacity>
+  
+          <Icon style={{color: "white", marginRight: 20}} name='more' />
         </Fragment>
       )
     }
@@ -75,9 +53,9 @@ class Product extends Component {
                 {
                   this.props.products.map(item => {
                     return (
-                      <ListItem key={item._id}>
+                      <ListItem key={ item._id }>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('FormProduct', { navigate: this.props.navigation.navigate, product: item })}>
-                          <Text>{item.itemName}</Text>
+                          <Text>{ item.itemName }</Text>
                         </TouchableOpacity>
                       </ListItem>
                     )

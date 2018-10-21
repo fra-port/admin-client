@@ -17,7 +17,7 @@ class AddProduct extends Component {
       width: '90%',
     },
     headerRight: (
-      <Icon style={{color: "white", marginRight: 20}} name='more' />
+      <Icon style={{ color: "white", marginRight: 20 }} name='more' />
     )
   }
 
@@ -27,14 +27,18 @@ class AddProduct extends Component {
   }
 
   addProduct = () => () => {
-    axios.post('http://35.240.197.42/items', { itemName: this.state.itemName, price: Number(this.state.price) })
-      .then(() => {
-        this.props.getProducts()
-        this.props.navigation.state.params.navigate('Product')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    if (this.state.itemName === '' || this.state.price === '') {
+      alert('all data must be filled')
+    } else {
+      axios.post('http://35.240.197.42/items', { itemName: this.state.itemName, price: Number(this.state.price) })
+        .then(() => {
+          this.props.getProducts()
+          this.props.navigation.state.params.navigate('Product')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 
   render() {
@@ -44,16 +48,16 @@ class AddProduct extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Item Name</Label>
-              <Input onChangeText={(itemName) => this.setState({ itemName })}/>
+              <Input onChangeText={(itemName) => this.setState({ itemName })} />
             </Item>
             <Item floatingLabel last>
               <Label>Price</Label>
-              <Input onChangeText={(price) => this.setState({ price })}/>
+              <Input onChangeText={(price) => this.setState({ price })} />
             </Item>
           </Form>
 
           <Container style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25 }}>
-            <Button primary style={{ marginRight: 20 }} onPress={ this.addProduct() }><Text> Add </Text></Button>
+            <Button primary style={{ marginRight: 20 }} onPress={this.addProduct()}><Text> Add </Text></Button>
           </Container>
         </Content>
       </Container>
