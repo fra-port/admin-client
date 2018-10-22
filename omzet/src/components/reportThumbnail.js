@@ -90,6 +90,7 @@ export default class ReportThumbnail extends Component {
                                                 <Text style={{}}>{item.sellingId.userId.firstName} {item.sellingId.userId.lastName}</Text>
                                                 <Text>List item sold:</Text>
                                                 <FlatList
+                                                    keyExtractor= {(item) => item._id}
                                                     data={item.sellingId.selling}
                                                     renderItem={
                                                         ({ item, index }) => (
