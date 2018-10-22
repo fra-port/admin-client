@@ -43,7 +43,7 @@ class DetailReportMonth extends Component {
       <ScrollView>
       <View>
         {
-          this.props.reportsMonthLoading ? <Spinner size="large" color="#58B9FE" style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 30}}/> :
+          this.props.reportsMonthLoading ? <Spinner color="#58B9FE"/> :
           <Card>
                 <CardItem header bordered>
                     <Text style={{color:"#F3962D"}}>Monthly Report </Text>

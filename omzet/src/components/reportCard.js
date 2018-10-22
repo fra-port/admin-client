@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, Fragment, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Card, CardItem, Text, Body, Spinner } from "native-base";
 import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'
@@ -32,7 +32,7 @@ export class CardReport extends Component {
         const report = this.props
         return (
             <View>
-                {report.isLoading ? <Spinner size="large" color="#58B9FE"/> :
+                {report.isLoading ? <Spinner color="#58B9FE"/> :
                 <Card>
                     <CardItem header bordered>
                         <Text style={{color:"#F3962D"}}>Daily Report</Text>
