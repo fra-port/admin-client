@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, TouchableOpacity, FlatList, Image, AsyncStorage } from 'react-native'
-import { Container, Header, Content, Icon, DatePicker, Text } from 'native-base'
+import { StyleSheet, View, TouchableOpacity, FlatList, Image, AsyncStorage, Text } from 'react-native'
+import { Container, Header, Content, Icon, DatePicker } from 'native-base'
 import CardReport from '../components/reportCard'
 import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'

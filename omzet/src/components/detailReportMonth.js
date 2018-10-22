@@ -43,10 +43,10 @@ class DetailReportMonth extends Component {
       <ScrollView>
       <View>
         {
-          this.props.reportsMonthLoading ? <Spinner size="large" color="#58B9FE" style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 30}}/> :
+          this.props.reportsMonthLoading ? <Spinner color="#58B9FE"/> :
           <Card>
                 <CardItem header bordered>
-                    <Text>Monthly Report </Text>
+                    <Text style={{color:"#F3962D"}}>Monthly Report </Text>
                     
                 </CardItem>
                 <CardItem bordered>
@@ -59,8 +59,8 @@ class DetailReportMonth extends Component {
                     </Body>
                 </CardItem>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MonthlyReport', {detail: this.props.reportsMonth})}>
-                    <CardItem footer bordered>
-                        <Text>Detail..</Text>
+                    <CardItem>
+                        <Text style={{color:"#4152A9"}}>Detail..</Text>
                     </CardItem>
                 </TouchableOpacity>
             </Card>

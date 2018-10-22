@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const getAllReports = (date) => {
-
     return (dispatch) => {
 
         dispatch({

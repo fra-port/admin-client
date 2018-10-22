@@ -34,7 +34,7 @@ export default class ReportThumbnail extends Component {
                         <Body style={{ flexDirection: 'row', padding: 10 }}>
                             <Text>
                                 Total income : {detail.totalIncome} {'\n'}
-                                Total agen : {detail.totalReport} {'\n'}
+                                Total agent : {detail.totalReport} {'\n'}
                             </Text>
                             <Body>
                                 <Text>Total Item sold: {'\n'}</Text>
@@ -90,6 +90,7 @@ export default class ReportThumbnail extends Component {
                                                 <Text style={{}}>{item.sellingId.userId.firstName} {item.sellingId.userId.lastName}</Text>
                                                 <Text>List item sold:</Text>
                                                 <FlatList
+                                                    keyExtractor= {(item) => item._id}
                                                     data={item.sellingId.selling}
                                                     renderItem={
                                                         ({ item, index }) => (

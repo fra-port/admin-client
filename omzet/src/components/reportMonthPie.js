@@ -5,7 +5,7 @@ import PieChart from 'react-native-pie-chart';
 
 export default class ReportMonthPie extends Component {
     static navigationOptions = ({ navigation }) => ({
-        title: 'Detail Report Monthy',
+        title: 'Detail Report Monthly',
         headerStyle: {
             backgroundColor: '#58B9FE',
         },
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10,
         justifyContent: 'center',
-        flexDirection: "row"
+        flexDirection: "row",
+        flexWrap: 'wrap'
     }
 });

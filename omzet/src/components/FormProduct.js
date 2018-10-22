@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, Alert } from 'react-native'
-import { Icon, Container, Content, Form, Item, Input, Label, Button, Text, View } from 'native-base'
+import { Icon, Container, Content, Form, Item, Input, Label, Button, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -24,7 +24,8 @@ class FormProduct extends Component {
   state = {
     itemName: '',
     price: '',
-    id: ''
+    id: '',
+    loading: false
   }
 
   componentDidMount() {
@@ -38,25 +39,83 @@ class FormProduct extends Component {
   }
 
   updateProduct = () => {
-    axios.put(`http://35.240.197.42/items/${this.state.id}`, { itemName: this.state.itemName, price: Number(this.state.price) })
-      .then(() => {
-        this.props.getProducts()
-        this.props.navigation.state.params.navigate('Product')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.setState({loading: true}, () => {
+      axios.put(`http://35.240.197.42/items/${this.state.id}`, { itemName: this.state.itemName, price: Number(this.state.price) })
+        .then(() => {
+          this.setState({loading: false}, () => {
+            Alert.alert(
+              'Info',
+              `Successfully update product`,
+              [
+                {
+                  text: 'OK', onPress: () => {
+                    this.props.getProducts()
+                    this.props.navigation.state.params.navigate('Product')
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
+          })
+        })
+        .catch(err => {
+          this.setState({loading: false}, () => {
+            Alert.alert(
+              'Alert',
+              `Unable update product`,
+              [
+                {
+                  text: 'OK', onPress: () => {
+                    this.props.getProducts()
+                    this.props.navigation.state.params.navigate('Product')
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
+          })
+        })
+    })
   }
 
   deleteProduct = () => {
-    axios.delete(`http://35.240.197.42/items/${this.state.id}`)
-      .then(() => {
-        this.props.getProducts()
-        this.props.navigation.state.params.navigate('Product')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.setState({loading: true}, () => {
+      axios.delete(`http://35.240.197.42/items/${this.state.id}`)
+        .then(() => {
+          this.setState({loading: false}, () => {
+            Alert.alert(
+              'Info',
+              `Successfully delete product`,
+              [
+                {
+                  text: 'OK', onPress: () => {
+                    this.props.getProducts()
+                    this.props.navigation.state.params.navigate('Product')
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
+          })
+        })
+        .catch(err => {
+          this.setState({loading: false}, () => {
+            Alert.alert(
+              'Alert',
+              `Unable delete product`,
+              [
+                {
+                  text: 'OK', onPress: () => {
+                    this.props.getProducts()
+                    this.props.navigation.state.params.navigate('Product')
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
+          })
+        })
+    })
   }
 
   render() {
@@ -78,6 +137,7 @@ class FormProduct extends Component {
             <Button success style={{ marginRight: 20 }} onPress={ () => this.updateProduct() }><Text> Update </Text></Button>
             <Button danger onPress={ () => this.deleteProduct() }><Text> Delete </Text></Button>
           </Container>
+          {this.state.loading && <Spinner color="#58B9FE"/>}
         </Content>
       </Container>
     )

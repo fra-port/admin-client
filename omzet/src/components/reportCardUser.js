@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { TouchableOpacity, FlatList, View } from 'react-native'
-import { Card, CardItem, Text, Body, List, ListItem, Left, Thumbnail, Item } from "native-base";
+import { FlatList, View } from 'react-native'
+import { Card, CardItem, Text, Body, Thumbnail, Spinner } from "native-base";
 import { getReportByUser } from '../store/reports/reports.action'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
-        userReports: state.reportsReducer.reportsUser
+        userReports: state.reportsReducer.reportsUser,
+        isLoading: state.reportsReducer.isLoading
     }
 }
 
@@ -26,6 +27,7 @@ export class reportCardUser extends Component {
     render() {
         return (
             <View>
+                {this.props.isLoading ? <Spinner color="#58B9FE"/> : 
                 <FlatList
                     data={this.props.userReports}
                     keyExtractor= {(item) => item._id}
@@ -33,7 +35,7 @@ export class reportCardUser extends Component {
                         ({ item, index }) => (
                             <Card>
                                 <CardItem header bordered>
-                                    <Text>Agent {item.userId.firstName} {item.userId.lastName} report {'\n'}Date: {item.createdAt.toString().substr(0, 10)}</Text>
+                                    <Text style={{color:"#F3962D"}}>Agent {item.userId.firstName} {item.userId.lastName} report {'\n'}Date: {item.createdAt.toString().substr(0, 10)}</Text>
                                 </CardItem>
                                 <CardItem bordered>
                                     <Body style={{ flexDirection: 'row' }}>
@@ -58,6 +60,7 @@ export class reportCardUser extends Component {
                         )
                     }
                 />
+            }
             </View>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container } from 'native-base';
-import {Image, StyleSheet, View, ProgressBarAndroid, Text, FlatList} from 'react-native'
+import { Container, Spinner } from 'native-base';
+import {Image, StyleSheet, View, Text, FlatList} from 'react-native'
 import AgentHeaderRight from '../components/AgentHeaderRight'
 import AgentThumbnail from '../components/AgentThumbnail'
 import {getAllAgent} from '../store/fetchAgent/action'
@@ -57,7 +57,7 @@ class Agent extends Component {
   render() {
     return (
       <Container>
-        {this.props.agent.isLoading && <ProgressBarAndroid color="#58B9FE" />}
+        {this.props.agent.isLoading && <Spinner color="#58B9FE" />}
         <View style={{padding: 3}}>
           {this.props.agent.allAgent.length > 0 && 
             <FlatList

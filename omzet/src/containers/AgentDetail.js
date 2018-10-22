@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Thumbnail, Icon, Button } from 'native-base';
+import { Container, Content, Thumbnail, Icon, Button, Spinner } from 'native-base';
 import { Text, View, StyleSheet, ScrollView, Alert } from 'react-native'
 import axios from 'axios'
 const serverURL = "http://35.240.197.42"
@@ -16,6 +16,12 @@ const mapDistpatchToProps = dispatch => {
 }
 
 class AgentDetail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+    }
+  }
   static navigationOptions = {
     title: 'Agent Detail',
     headerStyle: {
@@ -32,32 +38,38 @@ class AgentDetail extends Component {
   }
 
   handleDelete = () => {
-    axios.delete(`${serverURL}/users/${this.props.navigation.getParam('agent')._id}`)
-      .then(({ data }) => {
-        Alert.alert(
-          'Info',
-          `${data.message}`,
-          [
-            {
-              text: 'OK', onPress: () => {
-                this.props.getAllAgent()
-                this.props.navigation.navigate('HomeAgent')
-              }
-            },
-          ],
-          { cancelable: false }
-        )
+    this.setState({loading: true}, () => {
+      axios.delete(`${serverURL}/users/${this.props.navigation.getParam('agent')._id}`)
+        .then(({ data }) => {
+          this.setState({loading: false}, () => {
+            Alert.alert(
+              'Info',
+              `${data.message}`,
+              [
+                {
+                  text: 'OK', onPress: () => {
+                    this.props.getAllAgent()
+                    this.props.navigation.navigate('HomeAgent')
+                  }
+                },
+              ],
+              { cancelable: false }
+            )
+          })
+          .catch(err => {
+            this.setState({loading: false} , () => {
+              Alert.alert(
+                'Alert',
+                `${err.message}`,
+                [
+                  { text: 'OK', onPress: () => this.props.navigation.navigate('HomeAgent') },
+                ],
+                { cancelable: false }
+              )
+            })
+          })
       })
-      .catch(err => {
-        Alert.alert(
-          'Alert',
-          `${err.message}`,
-          [
-            { text: 'OK', onPress: () => this.props.navigation.navigate('HomeAgent') },
-          ],
-          { cancelable: false }
-        )
-      })
+    })
   }
 
   render() {
@@ -83,6 +95,7 @@ class AgentDetail extends Component {
                 <Text style={{ textAlign: 'center', color: 'white' }}>Delete</Text>
               </Button>
             </View>
+            {this.state.loading && <Spinner color="#58B9FE"/> }
             <CardReportUser userId={this.props.navigation.getParam('agent')._id}></CardReportUser>
           </Content>
         </Container>

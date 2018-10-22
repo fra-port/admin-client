@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Thumbnail, Button, Form, Item, Input } from 'native-base';
+import { Thumbnail, Button, Form, Item, Input, Spinner } from 'native-base';
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 import axios from 'axios'
@@ -109,21 +109,25 @@ class AgentForm extends Component {
   }
 
   handleClick = () => {
-    if (this.state.fetchImg) {
-      this.uploadImage()
-    } else if (this.state.address === '' || this.state.email === '' || this.state.firstName === '' || this.state.idTelegram === '' || this.state.lastName === '' || this.state.phoneNumber === '') {
-      alert('all data must be filled')
-    } else {
-      this.props.formMethod({
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        idTelegram: this.state.idTelegram,
-        email: this.state.email,
-        address: this.state.address,
-        phoneNumber: this.state.phoneNumber,
-        propicURL: this.state.propicURL
-      })
-    }
+    this.setState({loading: true}, () => {
+      if (this.state.fetchImg) {
+        this.uploadImage()
+      } else if (this.state.address === '' || this.state.email === '' || this.state.firstName === '' || this.state.idTelegram === '' || this.state.lastName === '' || this.state.phoneNumber === '') {
+        alert('all data must be filled')
+        this.setState({loading: false})
+      } else {
+        this.props.formMethod({
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
+          idTelegram: this.state.idTelegram,
+          email: this.state.email,
+          address: this.state.address,
+          phoneNumber: this.state.phoneNumber,
+          propicURL: this.state.propicURL
+        })
+        this.setState({loading: false})
+      }
+    })
   }
 
   render() {
@@ -204,6 +208,7 @@ class AgentForm extends Component {
             <Text style={{ textAlign: 'center', color: 'white' }}>{this.state.formType}</Text>
           </Button>
         </View>
+        {this.state.loading && <Spinner color="#58B9FE"/>}
       </ScrollView>
     );
   }

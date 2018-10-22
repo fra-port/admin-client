@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { TouchableOpacity } from 'react-native'
-import { Card, CardItem, Text, Body } from "native-base";
+import { TouchableOpacity, View } from 'react-native'
+import { Card, CardItem, Text, Body, Spinner } from "native-base";
 import { connect } from 'react-redux'
 import { getAllReports } from '../store/reports/reports.action'
 
 const mapStateToProps = (state) => {
     return {
-        reports: state.reportsReducer.reports
+        reports: state.reportsReducer.reports,
+        isLoading : state.reportsReducer.isLoading
     }
 }
 
@@ -22,30 +23,36 @@ export class CardReport extends Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        this.props.getAll(this.props.date)
+        if (this.props.date !== prevProps.date) {
+            this.props.getAll(this.props.date)
+        }
     }
 
     render() {
         const report = this.props
         return (
-            <Card>
-                <CardItem header bordered>
-                    <Text>Daily Report</Text>
-                </CardItem>
-                <CardItem bordered>
-                    <Body style={{ flexDirection: 'row' }}>
-                        <Text style={{ paddingRight: 10 }}>
-                            Total income : {report.reports.totalIncome} {'\n'}
-                            Total agen : {report.reports.totalReport} {'\n'}
-                        </Text>
-                    </Body>
-                </CardItem>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('DailyReport', { detail: report })}>
-                    <CardItem footer bordered>
-                        <Text>Detail..</Text>
+            <View>
+                {report.isLoading ? <Spinner color="#58B9FE"/> :
+                <Card>
+                    <CardItem header bordered>
+                        <Text style={{color:"#F3962D"}}>Daily Report</Text>
                     </CardItem>
-                </TouchableOpacity>
-            </Card>
+                    <CardItem bordered>
+                        <Body style={{ flexDirection: 'row' }}>
+                            <Text style={{ paddingRight: 10 }}>
+                                Total income : {report.reports.totalIncome} {'\n'}
+                                Total agent : {report.reports.totalReport} {'\n'}
+                            </Text>
+                        </Body>
+                    </CardItem>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('DailyReport', { detail: report })}>
+                        <CardItem>
+                            <Text style={{color:"#4152A9"}}>Detail..</Text>
+                        </CardItem>
+                    </TouchableOpacity>
+                </Card>
+            }
+            </View>
 
         );
     }
