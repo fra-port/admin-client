@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment} from 'react'
 import { StyleSheet, View, TouchableOpacity, FlatList, Image, AsyncStorage, Text } from 'react-native'
 import { Container, Header, Content, Icon, DatePicker } from 'native-base'
 import CardReport from '../components/reportCard'
@@ -48,7 +48,11 @@ const logout = (navigation) => {
 class Report extends Component {
   constructor(props) {
     super(props)
-    this.state = { chosenDate: new Date() }
+    this.state = { 
+      chosenDate: new Date(),
+      refresh: false,
+      totalReport: 0
+     }
     this.setDate = this.setDate.bind(this)
   }
 
@@ -56,31 +60,63 @@ class Report extends Component {
     this.setState({ chosenDate: newDate })
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Report',
-    headerStyle: {
-      backgroundColor: '#58B9FE',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      width: '90%',
-    },
-    headerLeft: (
-      <Image
-        source={require('../assets/omzet-logo.png')}
-        style={styles.image}
-      />
-    ),
-    headerRight: (
-      <TouchableOpacity onPress={() => {
-        logout(navigation)
-      }}>
-        <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
-      </TouchableOpacity>
-    )
-  });
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Report',
+      headerStyle: {
+        backgroundColor: '#58B9FE',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        width: '90%',
+      },
+      headerLeft: (
+        <Image
+          source={require('../assets/omzet-logo.png')}
+          style={styles.image}
+        />
+      ),
+      headerRight: (
+        <Fragment>
+          {
+            navigation.state.params && <TouchableOpacity onPress={navigation.state.params.refresh}>
+              <Octicons name='sync' size={25} style={{ color: 'white', marginRight: 20 }} />
+            </TouchableOpacity>
+          }
 
-  render() {
+          <TouchableOpacity onPress={() => {
+            logout(navigation)
+          }}>
+            <Octicons name='sign-out' size={25} style={{ color: 'white', marginRight: 15 }} />
+          </TouchableOpacity>
+        </Fragment>
+      )
+    }
+
+
+
+  }
+
+  refresh = () => {
+    if (this.state.refresh) {
+      this.setState({
+        refresh: false
+      })
+    } else {
+      this.setState({
+        refresh: true
+      })
+    }
+   
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      refresh: this.refresh.bind(this)
+    })
+  }
+
+  render(){
     return (
       <Container>
         <Content padder>
@@ -111,7 +147,7 @@ class Report extends Component {
           <View style={styles.title}>
             <Text>Report By Month</Text>
           </View>
-          <ReportMonth navigation={this.props.navigation} />
+          <ReportMonth navigation={this.props.navigation} isRefresh={this.state.refresh} />
         </Content>
       </Container>
     )
