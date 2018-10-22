@@ -41,7 +41,7 @@ export class CardReport extends Component {
                         <Body style={{ flexDirection: 'row' }}>
                             <Text style={{ paddingRight: 10 }}>
                                 Total income : {report.reports.totalIncome} {'\n'}
-                                Total agen : {report.reports.totalReport} {'\n'}
+                                Total agent : {report.reports.totalReport} {'\n'}
                             </Text>
                         </Body>
                     </CardItem>

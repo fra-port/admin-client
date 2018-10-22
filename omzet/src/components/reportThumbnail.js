@@ -34,7 +34,7 @@ export default class ReportThumbnail extends Component {
                         <Body style={{ flexDirection: 'row', padding: 10 }}>
                             <Text>
                                 Total income : {detail.totalIncome} {'\n'}
-                                Total agen : {detail.totalReport} {'\n'}
+                                Total agent : {detail.totalReport} {'\n'}
                             </Text>
                             <Body>
                                 <Text>Total Item sold: {'\n'}</Text>
