@@ -117,6 +117,7 @@ class Report extends Component {
   }
 
   render(){
+   
     return (
       <Container>
         <Content padder>
@@ -143,7 +144,7 @@ class Report extends Component {
           <Text>
             Date: {this.state.chosenDate.toString().substr(4, 12)}
           </Text>
-          <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()}></CardReport>
+          <CardReport navigation={this.props.navigation} date={this.state.chosenDate.toLocaleDateString()} isRefresh={this.state.refresh}></CardReport>
           <View style={styles.title}>
             <Text>Report By Month</Text>
           </View>

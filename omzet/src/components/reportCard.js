@@ -18,12 +18,16 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export class CardReport extends Component {
+   
     componentDidMount = () => {
         this.props.getAll(this.props.date)
+        this.setState({
+
+        })
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        if (this.props.date !== prevProps.date) {
+        if (this.props.date !== prevProps.date || this.props.isRefresh !== prevProps.isRefresh) {
             this.props.getAll(this.props.date)
         }
     }
