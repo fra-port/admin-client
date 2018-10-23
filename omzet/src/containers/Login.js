@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native'
 import { Form, Item, Input, Label, Spinner } from 'native-base';
 import firebase from 'react-native-firebase'
+import axios from 'axios'
+const serverURL = "http://35.240.197.42"
 
 class Login extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ class Login extends Component {
           .then(data => {
             this.setState({loading:false}, () => {
               AsyncStorage.setItem('user', JSON.stringify(data.user))
+              let fcmToken = AsyncStorage.getItem('fcmToken')
+              axios.post(`${serverURL}/fcm/create`, {token : fcmToken})
               this.props.navigation.navigate('Home')
             })
           })

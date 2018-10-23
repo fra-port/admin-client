@@ -7,6 +7,7 @@ import { getAllReports } from '../store/reports/reports.action'
 import Octicons from 'react-native-vector-icons/Octicons'
 import firebase from 'react-native-firebase'
 import ReportMonth from '../components/reportMonth'
+import axios from 'axios'
 
 const styles = StyleSheet.create({
   image: {
@@ -34,6 +35,8 @@ const logout = (navigation) => {
     .then(() => {
       firebase.auth().signOut()
         .then(() => {
+          let fcmToken = AsyncStorage.getItem('fcmToken')
+          axios.post(`${serverURL}/fcm/remove`, {token : fcmToken})
           navigation.navigate('Login')
         })
         .catch(err => {
