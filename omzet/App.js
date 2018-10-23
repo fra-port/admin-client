@@ -138,6 +138,7 @@ export default class App extends Component {
         Alert.alert(err)
       })
     let fcmToken = await firebase.messaging().getToken()
+    console.log(fcmToken)
     await AsyncStorage.setItem('fcmToken', fcmToken)
     const notificationOpen: NotificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
