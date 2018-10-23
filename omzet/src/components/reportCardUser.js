@@ -39,7 +39,7 @@ export class reportCardUser extends Component {
                                 </CardItem>
                                 <CardItem bordered>
                                     <Body style={{ flexDirection: 'row' }}>
-                                        <Thumbnail square source={require('../assets/omzet-logo.png')} />
+                                        <Thumbnail square source={require('../assets/sale.png')} />
                                         <View style={{ flexDirection: 'column', marginLeft:20 }}>
                                             <Text>List item sold:</Text>
                                             <FlatList
@@ -47,7 +47,7 @@ export class reportCardUser extends Component {
                                                 renderItem={
                                                     ({ item, index }) => (
                                                         <View>
-                                                            <Text>{item.itemName} = {item.quantity} pcs = Rp { item.Total.toLocaleString()}</Text>
+                                                            <Text note numberOfLines={1}>{item.itemName} = {item.quantity} pcs = Rp { item.Total.toLocaleString()}</Text>
                                                         </View>
                                                     )
                                                 }

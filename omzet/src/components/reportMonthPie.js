@@ -14,8 +14,18 @@ export default class ReportMonthPie extends Component {
             width: '90%',
         }
     });
+
+    componentDidMount() {
+        console.log('masuk did mount report month pie');
+    }
+
+    componentDidUpdate() {
+        console.log('masuk did update report month pie');
+    }
     
     render() {
+        console.log('masuk render report month pie');
+        
         const detail = this.props.navigation.state.params.detail.data.obj
         const serie = []
         const newList = detail.listItem

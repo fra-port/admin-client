@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {ActivityIndicator, TouchableOpacity, ScrollView} from 'react-native'
-import { View, Text, Card, CardItem, Body, Spinner} from 'native-base';
+import { ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Card, CardItem, Body, Spinner } from 'native-base';
 import { connect } from 'react-redux'
 import getReportMonth from '../store/reports/reports.month.actoin'
 
@@ -8,13 +8,13 @@ class DetailReportMonth extends Component {
   constructor() {
     super()
     this.state = {
-      month: ''
+      month: '',
+      refresh: false
     }
   }
 
   componentDidMount = () => {
     let date = this.props.date
-    
     let d = new Date(date._i)
     let newMonth = d.getMonth() + 1
     this.setState({
@@ -25,18 +25,23 @@ class DetailReportMonth extends Component {
 
   componentDidUpdate = () => {
 
-
     let date = this.props.date
-    
     let d = new Date(date._i)
     let newMonth = d.getMonth() + 1
-    if (this.state.month !== newMonth) {
+    if (this.state.month !== newMonth || this.props.isRefresh !== this.state.refresh) {
       this.setState({
-        month: newMonth
+        month: newMonth,
+        refresh: this.props.isRefresh
       }, () => {
         this.props.getMonthReport(newMonth)
       })
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      refresh: this.props.isRefresh
+  })
   }
   render() {
     return (
@@ -50,23 +55,23 @@ class DetailReportMonth extends Component {
                     
                 </CardItem>
                 <CardItem bordered>
-                    <Body style={{ flexDirection: 'row' }}>
-                          {
-                            this.props.reportsMonth.data &&  <Text style={{ paddingRight: 10 }}>  
-                            Total income : {this.props.reportsMonth.data.obj.incomeMonth} {'\n'}
-                            Total agen : {this.props.reportsMonth.data.obj.users.listUsers.length} {'\n'}</Text>
-                          }
-                    </Body>
+                  <Body style={{ flexDirection: 'row' }}>
+                    {
+                      this.props.reportsMonth.data && <Text style={{ paddingRight: 10 }}>
+                        Total income : {this.props.reportsMonth.data.obj.incomeMonth} {'\n'}
+                        Total agen : {this.props.reportsMonth.data.obj.users.listUsers.length} {'\n'}</Text>
+                    }
+                  </Body>
                 </CardItem>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MonthlyReport', {detail: this.props.reportsMonth})}>
                     <CardItem>
                         <Text style={{color:"#4152A9"}}>Detail..</Text>
                     </CardItem>
                 </TouchableOpacity>
-            </Card>
-        }
-        
-      </View>
+              </Card>
+          }
+
+        </View>
       </ScrollView>
     )
   }

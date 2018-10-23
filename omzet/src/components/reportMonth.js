@@ -4,23 +4,22 @@ import { Card } from 'native-base'
 import MonthSelectorCalendar from 'react-native-month-selector'
 import moment from 'moment'
 import Octicons from 'react-native-vector-icons/Octicons'
-// import DetailMonth from '../components/detailReportMonth'
 import DetailReportMonth from '../components/detailReportMonth';
 
 
 export default class ReportMonth extends Component {
 
-
     constructor(props) {
         super()
         this.state = {
             month: moment(new Date(), 'MMM YYYY'),
-            status: false
+            status: false,
+            totalreport: 0,
+            refresh: false
         }
     }
 
     convertMonth = (data) => {
-
         if (typeof data._i == 'string') {
             return this.state.month.format('MMM YYYY')
         } else {
@@ -31,7 +30,23 @@ export default class ReportMonth extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.isRefresh !== prevProps.isRefresh) {
+            this.setState({
+                month: moment(new Date(), 'MMM YYYY'),
+                refresh: this.props.isRefresh
+            })
+        }
+       
+    }
+
+    componentDidMount() {
+        this.setState({
+            refresh: this.props.isRefresh
+        })
+    }
     render() {
+
         return (
             <View>
                 <View style={styles.rowStyle}>
@@ -41,7 +56,7 @@ export default class ReportMonth extends Component {
                     </TouchableOpacity>
                 </View>
                 {
-                    this.state.status && <Card> 
+                    this.state.status && <Card>
                         <View style={{ padding: 30 }}>
                             <Text>
                                 Selected Month is {this.state.month && this.state.month.format('MM YYYY')}
@@ -56,7 +71,7 @@ export default class ReportMonth extends Component {
                 <Text>
                     Month :  {this.convertMonth(this.state.month)}
                 </Text>
-                <DetailReportMonth date={this.state.month} navigation={this.props.navigation} />
+                <DetailReportMonth date={this.state.month} navigation={this.props.navigation} isRefresh={this.state.refresh}/>
             </View>
         )
     }
