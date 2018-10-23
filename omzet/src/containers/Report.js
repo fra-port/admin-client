@@ -117,7 +117,6 @@ class Report extends Component {
   }
 
   render(){
-   
     return (
       <Container>
         <Content padder>
