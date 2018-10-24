@@ -177,16 +177,16 @@ export default class App extends Component {
         const action = notificationOpen.action;
         // Get information about the notification that was opened
         const notification: Notification = notificationOpen.notification;
-        var seen = [];
-        alert(JSON.stringify(notification.data, function(key, val) {
-            if (val != null && typeof val == "object") {
-                if (seen.indexOf(val) >= 0) {
-                    return;
-                }
-                seen.push(val);
-            }
-            return val;
-        }));
+        // var seen = [];
+        // alert(JSON.stringify(notification.data, function(key, val) {
+        //     if (val != null && typeof val == "object") {
+        //         if (seen.indexOf(val) >= 0) {
+        //             return;
+        //         }
+        //         seen.push(val);
+        //     }
+        //     return val;
+        // }));
         firebase.notifications().removeDeliveredNotification(notification.notificationId);
 
     });

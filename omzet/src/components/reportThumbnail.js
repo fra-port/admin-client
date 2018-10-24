@@ -33,7 +33,7 @@ export default class ReportThumbnail extends Component {
                     <CardItem>
                         <Body style={{ flexDirection: 'row', padding: 10 }}>
                             <Text>
-                                Total income : {detail.totalIncome} {'\n'}
+                                Total income : Rp.{detail.totalIncome.toLocaleString('en-ID')} {'\n'}
                                 Total agent : {detail.totalReport} {'\n'}
                             </Text>
                             <Body>
