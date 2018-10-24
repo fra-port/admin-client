@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView, AsyncStorage } from 'react-native'
 import { Form, Item, Input, Label, Spinner } from 'native-base';
 import firebase from 'react-native-firebase'
+import axios from 'axios'
+const serverURL = "http://35.240.197.42"
 
 class Login extends Component {
   constructor(props) {
@@ -22,6 +24,10 @@ class Login extends Component {
           .then(data => {
             this.setState({loading:false}, () => {
               AsyncStorage.setItem('user', JSON.stringify(data.user))
+              AsyncStorage.getItem('fcmToken')
+                .then(fcmToken => {
+                  axios.post(`${serverURL}/fcm/create`, {token : fcmToken})
+                })
               this.props.navigation.navigate('Home')
             })
           })
@@ -56,8 +62,8 @@ class Login extends Component {
             />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO THE OMZET</Text>
-            <Text style={{ color: "white" }} >Apps for daily omzet reporting test</Text>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO OMZET</Text>
+            <Text style={{ color: "white" }} >Apps for daily omzet reporting</Text>
           </View>
           <View style={{ width: 200 }}>
             <Form>
