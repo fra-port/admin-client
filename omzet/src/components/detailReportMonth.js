@@ -58,7 +58,7 @@ class DetailReportMonth extends Component {
                   <Body style={{ flexDirection: 'row' }}>
                     {
                       this.props.reportsMonth.data && <Text style={{ paddingRight: 10 }}>
-                        Total income : {this.props.reportsMonth.data.obj.incomeMonth} {'\n'}
+                        Total income : Rp.{this.props.reportsMonth.data.obj.incomeMonth} {'\n'}
                         Total agen : {this.props.reportsMonth.data.obj.users.listUsers.length} {'\n'}</Text>
                     }
                   </Body>

@@ -14,18 +14,8 @@ export default class ReportMonthPie extends Component {
             width: '90%',
         }
     });
-
-    componentDidMount() {
-        console.log('masuk did mount report month pie');
-    }
-
-    componentDidUpdate() {
-        console.log('masuk did update report month pie');
-    }
     
     render() {
-        console.log('masuk render report month pie');
-        
         const detail = this.props.navigation.state.params.detail.data.obj
         const serie = []
         const newList = detail.listItem
@@ -51,7 +41,7 @@ export default class ReportMonthPie extends Component {
                         <CardItem>
                             <Body style={{ flexDirection: 'row', padding: 10 }}>
                                 <Text>
-                                    Total income : {detail.incomeMonth} {'\n'}
+                                    Total income : Rp.{detail.incomeMonth} {'\n'}
                                     Total agen : {detail.users.listUsers.length} {'\n'}
                                 </Text>
                                 <Body>
