@@ -1,3 +1,4 @@
+console.disableYellowBox = true
 import React, { Component } from 'react';
 import { createSwitchNavigator, createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import {Alert, AsyncStorage} from 'react-native'
