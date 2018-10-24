@@ -24,8 +24,10 @@ class Login extends Component {
           .then(data => {
             this.setState({loading:false}, () => {
               AsyncStorage.setItem('user', JSON.stringify(data.user))
-              let fcmToken = AsyncStorage.getItem('fcmToken')
-              axios.post(`${serverURL}/fcm/create`, {token : fcmToken})
+              AsyncStorage.getItem('fcmToken')
+                .then(fcmToken => {
+                  axios.post(`${serverURL}/fcm/create`, {token : fcmToken})
+                })
               this.props.navigation.navigate('Home')
             })
           })

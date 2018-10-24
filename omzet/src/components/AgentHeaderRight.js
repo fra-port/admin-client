@@ -4,14 +4,17 @@ import { Icon } from 'native-base';
 import Octicons from 'react-native-vector-icons/Octicons'
 import firebase from 'react-native-firebase'
 import axios from 'axios'
+const serverURL = "http://35.240.197.42"
 
 const logout = (navigation) => {
   AsyncStorage.removeItem('user')
     .then(() => {
       firebase.auth().signOut()
         .then(() => {
-          let fcmToken = AsyncStorage.getItem('fcmToken')
-          axios.post(`${serverURL}/fcm/remove`, {token : fcmToken})
+          AsyncStorage.getItem('fcmToken')
+            .then(fcmToken => {
+              axios.post(`${serverURL}/fcm/remove`, {token : fcmToken})
+            })
           navigation.navigate('Login')
         })
         .catch(err => {
