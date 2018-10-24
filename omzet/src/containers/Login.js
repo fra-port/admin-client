@@ -62,8 +62,8 @@ class Login extends Component {
             />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO THE OMZET</Text>
-            <Text style={{ color: "white" }} >Apps for daily omzet reporting test</Text>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold" }} >WELCOME TO OMZET</Text>
+            <Text style={{ color: "white" }} >Apps for daily omzet reporting</Text>
           </View>
           <View style={{ width: 200 }}>
             <Form>
