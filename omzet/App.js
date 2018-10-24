@@ -139,22 +139,22 @@ export default class App extends Component {
         Alert.alert(err)
       })
     let fcmToken = await firebase.messaging().getToken()
-    console.log(fcmToken)
+    // console.log(fcmToken)
     await AsyncStorage.setItem('fcmToken', fcmToken)
     const notificationOpen: NotificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
         const action = notificationOpen.action;
         const notification: Notification = notificationOpen.notification;
-        var seen = [];
-        alert(JSON.stringify(notification.data, function(key, val) {
-            if (val != null && typeof val == "object") {
-                if (seen.indexOf(val) >= 0) {
-                    return;
-                }
-                seen.push(val);
-            }
-            return val;
-        }));
+        // var seen = [];
+        // alert(JSON.stringify(notification.data, function(key, val) {
+        //     if (val != null && typeof val == "object") {
+        //         if (seen.indexOf(val) >= 0) {
+        //             return;
+        //         }
+        //         seen.push(val);
+        //     }
+        //     return val;
+        // }));
     }
     const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
             .setDescription('My apps test channel');
@@ -178,16 +178,16 @@ export default class App extends Component {
         const action = notificationOpen.action;
         // Get information about the notification that was opened
         const notification: Notification = notificationOpen.notification;
-        var seen = [];
-        alert(JSON.stringify(notification.data, function(key, val) {
-            if (val != null && typeof val == "object") {
-                if (seen.indexOf(val) >= 0) {
-                    return;
-                }
-                seen.push(val);
-            }
-            return val;
-        }));
+        // var seen = [];
+        // alert(JSON.stringify(notification.data, function(key, val) {
+        //     if (val != null && typeof val == "object") {
+        //         if (seen.indexOf(val) >= 0) {
+        //             return;
+        //         }
+        //         seen.push(val);
+        //     }
+        //     return val;
+        // }));
         firebase.notifications().removeDeliveredNotification(notification.notificationId);
 
     });
